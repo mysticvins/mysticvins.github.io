@@ -390,6 +390,22 @@ main,header,footer{position:relative;z-index:2}
 .affirm .focus{color:var(--muted);font-size:15.5px;max-width:52ch;margin:0 auto}
 .affirm .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
 
+
+/* profile portrait */
+.portrait{position:relative;margin:0;justify-self:center;width:min(100%,400px);display:flex;flex-direction:column;align-items:center;gap:18px}
+.portrait .arch{position:relative;width:100%;aspect-ratio:4/5;border-radius:200px 200px 22px 22px;padding:8px;background:linear-gradient(150deg,#F2D99C,#A07E3E 40%,#E9CB86 65%,#8C6A2E);box-shadow:0 30px 70px -30px #000,0 0 60px -20px rgba(212,176,106,.55)}
+.portrait .arch img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;border-radius:192px 192px 16px 16px;display:block}
+.portrait .arch::after{content:"";position:absolute;inset:-14px;border-radius:214px 214px 30px 30px;border:1px solid rgba(212,176,106,.35);pointer-events:none}
+.portrait .ph{position:absolute;top:-22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;padding:8px 14px;border-radius:999px;background:var(--bg);border:1px solid rgba(212,176,106,.45)}
+.portrait .ph i{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F5DFA6,#C59A4E 70%);box-shadow:0 0 12px -2px rgba(242,217,156,.7)}
+.portrait .ph i:nth-child(1){-webkit-mask-image:radial-gradient(circle at 75% 50%,transparent 46%,#000 47%);mask-image:radial-gradient(circle at 75% 50%,transparent 46%,#000 47%)}
+.portrait .ph i:nth-child(3){-webkit-mask-image:radial-gradient(circle at 25% 50%,transparent 46%,#000 47%);mask-image:radial-gradient(circle at 25% 50%,transparent 46%,#000 47%)}
+.portrait figcaption{text-align:center;display:flex;flex-direction:column;gap:4px}
+.portrait figcaption b{font-family:var(--display);font-weight:500;font-size:26px;color:var(--gold-hi)}
+.portrait figcaption span{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.pquote{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.2vw,24px);color:var(--gold-hi)!important}
+@media (max-width:860px){.portrait{width:min(100%,340px)}}
+
 /* welcome toast */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:80;transform:translate(-50%,140%);width:min(560px,calc(100% - 110px));display:flex;gap:14px;align-items:center;padding:14px 16px 14px 20px;border-radius:18px;background:linear-gradient(120deg,#3D1832,#270C1F);border:1px solid rgba(212,176,106,.55);box-shadow:0 20px 50px -16px #000,0 0 30px -10px rgba(212,176,106,.5);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .toast.show{transform:translate(-50%,0)}
@@ -424,7 +440,7 @@ main,header,footer{position:relative;z-index:2}
       <a href="#today">Today's energy</a>
       <a href="#certified">Certified</a>
       <a href="#faq">FAQ</a>
-      <a href="#about">About</a>
+      <a href="#about">Meet Vinita</a>
       <a class="btn btn-gold" href="#enquire">Send an enquiry</a>
     </nav>
   </div>
@@ -605,14 +621,15 @@ main,header,footer{position:relative;z-index:2}
 
   <section class="block" id="about">
     <div class="wrap about">
-      <div class="moons reveal" aria-hidden="true">
-        <div class="ring"></div><div class="ring r2"></div>
-        <div class="ph"><i></i><i></i><i></i></div>
-        <p class="quote">“Helping you find perspective when life feels uncertain.”</p>
-      </div>
+      <figure class="portrait reveal">
+        <div class="arch"><img src="vinita.jpg" alt="Vinita Aryasomayajula at her reading table with tarot cards, crystals and a candle" loading="lazy" width="880" height="1100"></div>
+        <div class="ph" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figcaption><b>Vinita Aryasomayajula</b><span>Tarot Reader · Intuitive Guide · Healer</span></figcaption>
+      </figure>
       <div class="about-copy reveal">
-        <span class="eyebrow">About Vinita</span>
+        <span class="eyebrow">Meet Vinita</span>
         <h2>A calm, intuitive space to be heard</h2>
+        <p class="pquote">“Helping you find perspective when life feels uncertain.”</p>
         <p>Vinita is an intuitive tarot reader and energy healer. Through tarot, Reiki, Ho'oponopono and tapping, she helps people see their situation clearly, release what is holding them back and take the next step with confidence.</p>
         <p>Every session is personal and private. You choose the area of life, and she brings the practice that suits it best.</p>
         <div class="facts">
@@ -620,6 +637,7 @@ main,header,footer{position:relative;z-index:2}
           <div class="fact"><b data-count="6">6</b><span>healing practices</span></div>
           <div class="fact"><b>3</b><span>certifications in tarot &amp; Reiki</span></div>
         </div>
+        <div class="cta"><a class="btn btn-gold" href="#enquire">Book a session</a><a class="btn btn-ghost" href="#certified">See her certificates</a></div>
       </div>
     </div>
   </section>
