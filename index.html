@@ -699,7 +699,7 @@ main,header,footer{position:relative;z-index:2}
               <div class="field"><label for="f-phone">WhatsApp number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="10-digit mobile number"><span class="err"></span></div>
             </div>
             <div class="row">
-              <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err"></span></div>
+              <div class="field"><label for="f-email">Email <span class="opt">(for your confirmation)</span></label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com"><span class="err"></span></div>
               <div class="field"><label for="f-city">City <span class="opt">(optional)</span></label><input id="f-city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Hyderabad"></div>
             </div>
           </fieldset>
@@ -1045,7 +1045,7 @@ function check(i){
     n.value.trim().length < 2 ? fail(n, 'Please enter your name.') : setErr(n);
     const digits = p.value.replace(/\D/g, '');
     (digits.length < 10 || digits.length > 13) ? fail(p, 'Please enter a 10-digit mobile number.') : setErr(p);
-    (em.value && !/^\S+@\S+\.\S+$/.test(em.value)) ? fail(em, 'This email address looks incomplete.') : setErr(em);
+    !em.value.trim() ? fail(em, 'Please enter your email so we can send your confirmation.') : (!/^\S+@\S+\.\S+$/.test(em.value.trim()) ? fail(em, 'This email address looks incomplete.') : setErr(em));
   }
   if (i === 1) { const s = $('#f-service'); !s.value ? fail(s, 'Please choose a service, or "Not sure".') : setErr(s); }
   if (i === 2) {
