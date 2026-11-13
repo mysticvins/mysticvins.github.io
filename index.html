@@ -50,6 +50,10 @@ p{margin:0}
 #intro{position:fixed;inset:0;z-index:100;background:#1C0816;display:flex;align-items:center;justify-content:center;transition:opacity .9s ease, visibility .9s}
 #intro video{width:min(100%,1100px);height:auto;max-height:100%;object-fit:contain}
 #intro.gone{opacity:0;visibility:hidden}
+#introImg{position:absolute;width:min(100%,1100px);height:auto;max-height:100%;object-fit:contain;opacity:0;pointer-events:none}
+#intro.still video{opacity:0}
+#intro.still #introImg{animation:logoIn 2.8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes logoIn{0%{opacity:0;transform:scale(.94);filter:blur(10px) brightness(.6)}45%{opacity:1;filter:blur(0) brightness(1.15)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
 #skip{position:absolute;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.35);color:var(--text);border:1px solid rgba(243,234,216,.35);border-radius:999px;padding:8px 18px;font:400 14px var(--body);letter-spacing:.1em;cursor:pointer}
 
 /* progress + header */
@@ -415,6 +419,7 @@ main,header,footer{position:relative;z-index:2}
 @media (max-width:620px){.toast{left:16px;right:86px;width:auto;transform:translateY(140%)}.toast.show{transform:none}}
 
 @media (prefers-reduced-motion:reduce){
+  #intro.still #introImg{opacity:1 !important}
   *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
   #glow{display:none}
 }
@@ -425,6 +430,7 @@ main,header,footer{position:relative;z-index:2}
 
 <div id="intro" aria-hidden="true">
   <video id="introVid" src="intro.mp4" poster="intro-poster.jpg" muted playsinline preload="auto"></video>
+  <img id="introImg" src="intro-poster.jpg" alt="">
   <button id="skip" type="button">Skip</button>
 </div>
 <div id="progress"></div>
@@ -870,16 +876,20 @@ $('#waFloat').href = waLink('Hi Mystic Vins, I found you through your website an
 $('#waFoot').href = waLink('Hi Mystic Vins!');
 if (CONFIG.whatsapp) $('#waFoot').textContent = 'WhatsApp · +' + CONFIG.whatsapp.replace(/^(\d{2})(\d{5})(\d+)$/, '$1 $2 $3');
 
-// ---- Intro film (once per visit) ----
+// ---- Intro film (once per visit), with an animated-logo fallback when video can't autoplay ----
 (function(){
-  const ov = $('#intro'), v = $('#introVid');
+  const ov = $('#intro'), v = $('#introVid'), img = $('#introImg');
   let seen = false; try { seen = sessionStorage.getItem('mv-intro') === '1'; } catch(e){}
-  const close = () => { ov.classList.add('gone'); try { sessionStorage.setItem('mv-intro','1'); } catch(e){} setTimeout(()=>{ try{v.pause()}catch(e){} }, 900); };
-  if (seen || reduce) { ov.remove(); return; }
-  $('#skip').onclick = close;
+  if (seen) { ov.remove(); return; }
+  let closed = false;
+  const close = () => { if (closed) return; closed = true; ov.classList.add('gone'); try { sessionStorage.setItem('mv-intro','1'); } catch(e){} setTimeout(()=>{ try{v.pause()}catch(e){} ov.remove(); }, 900); };
+  const fallback = () => { if (closed) return; ov.classList.add('still'); try{v.pause()}catch(e){} setTimeout(close, reduce ? 1600 : 2800); };
+  $('#skip').onclick = close; ov.addEventListener('click', e => { if (e.target !== $('#skip')) close(); });
+  if (reduce) return fallback();
   v.addEventListener('ended', close);
+  const guard = setTimeout(() => { if (v.currentTime < 0.2) fallback(); }, 1500);   // stalled or blocked: show the logo instead
   setTimeout(close, 7000);
-  const p = v.play(); if (p && p.catch) p.catch(close);
+  const p = v.play(); if (p && p.catch) p.catch(() => { clearTimeout(guard); fallback(); });
 })();
 
 // ---- Header, progress bar, menu ----
