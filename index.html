@@ -410,6 +410,8 @@ main,header,footer{position:relative;z-index:2}
 .pquote{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.2vw,24px);color:var(--gold-hi)!important}
 @media (max-width:860px){.portrait{width:min(100%,340px)}}
 
+.mailnote{max-width:46ch;text-align:center;font-size:15px;color:var(--muted);border:1px dashed rgba(212,176,106,.45);border-radius:14px;padding:12px 16px;background:rgba(212,176,106,.06)}
+.mailnote b{color:var(--gold-hi);font-weight:500;word-break:break-all}
 /* welcome toast */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:80;transform:translate(-50%,140%);width:min(560px,calc(100% - 110px));display:flex;gap:14px;align-items:center;padding:14px 16px 14px 20px;border-radius:18px;background:linear-gradient(120deg,#3D1832,#270C1F);border:1px solid rgba(212,176,106,.55);box-shadow:0 20px 50px -16px #000,0 0 30px -10px rgba(212,176,106,.5);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .toast.show{transform:translate(-50%,0)}
@@ -760,9 +762,9 @@ main,header,footer{position:relative;z-index:2}
         <div class="done" id="done" aria-live="polite">
           <svg class="tick" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46"/><path d="M30 52l13 13 27-29"/></svg>
           <h3 style="font-size:36px">Thank you, <span id="d-name"></span></h3>
-          <p class="lead" style="text-align:center">One last step: tap <b style="color:var(--gold-hi);font-weight:500">Send on WhatsApp</b>, then press send in WhatsApp. We'll reply with a time and price.</p>
+          <p class="lead" style="text-align:center">We've received your enquiry. We'll reply on WhatsApp with a time and price, usually within a day.</p>
           <div class="summary" id="summary"></div>
-          <a class="btn btn-gold" id="waSend" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <p class="mailnote" id="mailNote" hidden>A confirmation email is on its way to <b id="d-email"></b>. If it isn't in your inbox in a few minutes, please check your <b>Spam</b> or <b>Promotions</b> folder and mark it "Not spam".</p>
           <button class="btn btn-ghost" id="again" type="button">Start a new enquiry</button>
         </div>
       </div>
@@ -1072,7 +1074,7 @@ function submit(){
   $$('#summary b').forEach((b, i) => b.textContent = rows[i][1]);
   $('#d-name').textContent = data.name.split(' ')[0];
   const text = 'Hi Mystic Vins, I would like to enquire about a session.\n\nName: ' + data.name + '\nService: ' + data.service + '\nArea: ' + data.areas + '\nSession: ' + data.mode + ', ' + data.time + (data.message ? '\nAbout: ' + data.message : '') + '\nFound you via: ' + data.source;
-  $('#waSend').href = waLink(text);
+  if (/^\S+@\S+\.\S+$/.test(data.email)) { $('#d-email').textContent = data.email; $('#mailNote').hidden = false; } else $('#mailNote').hidden = true;
   form.hidden = true; $('.stepper').hidden = true; $('#done').classList.add('show');
   $('#done').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
 }
