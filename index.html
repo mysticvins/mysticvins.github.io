@@ -861,8 +861,8 @@ const CONFIG = {
   formEndpoint: "",        // later: Google Apps Script URL that saves enquiries to the CRM sheet
   visitEndpoint: "",       // later: Google Apps Script URL that privately counts visits in the CRM sheet
   googleForm: {            // filled in once the Google Form exists: its formResponse URL and the entry.NNN id of each question
-    action: "",
-    fields: {name:"", phone:"", email:"", city:"", service:"", areas:"", message:"", mode:"", time:"", source:"", page_src:""}
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSetSNPk6jFHdCVzPHNIe9pC5SngEUv832tSDHdh-xo-neeQqg/formResponse",
+    fields: {name:"entry.1621363871", phone:"entry.1932152227", email:"entry.1801783385", city:"entry.1531688251", service:"entry.621580432", areas:"entry.181209667", message:"entry.1903995359", mode:"entry.1666429605", time:"entry.740753280", source:"entry.471804867", page_src:"entry.622703155"}
   },
   affirmationEndpoint: ""  // later: Apps Script URL that serves the Claude-written affirmation of the day (see apps-script/affirmations.gs)
 };
