@@ -1,0 +1,1318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#270C1F">
+<title>Mystic Vins</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tarot, Reiki, Ho'oponopono, EFT/TFT, handwriting analysis and identity shift meditation with Vinita. Send an enquiry.">
+<link rel="icon" href="emblem.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: dark plum night sky taken from the logo film; one centred column, sections separated by gold hairlines and moon-phase dividers. Deliberately single-theme. */
+:root{
+  --bg:#270C1F; --bg-deep:#1A0714; --panel:#33122A; --panel-2:#3D1832; --line:#5C3150;
+  --gold:#D4B06A; --gold-hi:#F2D99C; --gold-dim:#A07E3E;
+  --text:#F3EAD8; --muted:#CDB8C6; --ink:#270C1F;
+  --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --body:'Jost', 'Segoe UI', Arial, sans-serif;
+  --radius:18px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.65;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg-deep)}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left,0px));padding-right:max(20px, env(safe-area-inset-right,0px))}
+.eyebrow{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.lead{color:var(--muted);font-size:clamp(17px,1.6vw,19px);max-width:60ch}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+
+/* buttons */
+.btn{--h:52px;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:var(--h);padding:0 26px;border-radius:999px;font:500 15px var(--body);letter-spacing:.06em;text-decoration:none;cursor:pointer;border:1px solid var(--gold);position:relative;overflow:hidden;transition:transform .25s, box-shadow .25s, background .25s, color .25s;white-space:nowrap}
+.btn-gold{background:linear-gradient(135deg,#E9CB86,#C59A4E 55%,#E8C97F);color:var(--ink);border-color:transparent;box-shadow:0 8px 30px -10px rgba(212,176,106,.6)}
+.btn-gold::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.btn-gold:hover::after{transform:translateX(120%)}
+.btn-ghost{background:transparent;color:var(--gold-hi)}
+.btn-ghost:hover{background:rgba(212,176,106,.12)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+
+/* intro film */
+#intro{position:fixed;inset:0;z-index:100;background:#1C0816;display:flex;align-items:center;justify-content:center;transition:opacity .9s ease, visibility .9s}
+#intro video{width:min(100%,1100px);height:auto;max-height:100%;object-fit:contain}
+#intro.gone{opacity:0;visibility:hidden}
+#skip{position:absolute;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.35);color:var(--text);border:1px solid rgba(243,234,216,.35);border-radius:999px;padding:8px 18px;font:400 14px var(--body);letter-spacing:.1em;cursor:pointer}
+
+/* progress + header */
+#progress{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold-dim),var(--gold-hi));z-index:70}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:background .35s, box-shadow .35s, backdrop-filter .35s}
+header.site.scrolled{background:rgba(26,7,20,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(212,176,106,.18)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:76px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:42px;height:42px;border-radius:50%;box-shadow:0 0 0 1px rgba(212,176,106,.5),0 0 18px rgba(212,176,106,.25)}
+.brand span{font-family:var(--display);font-size:25px;letter-spacing:.14em;color:var(--gold-hi)}
+.links{display:flex;align-items:center;gap:28px}
+.links a{text-decoration:none;font-size:15px;letter-spacing:.08em;color:var(--muted);position:relative;transition:color .2s}
+.links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+.links a:not(.btn):hover{color:var(--gold-hi)}
+.links a:not(.btn):hover::after{transform:scaleX(1)}
+.links .btn{--h:42px;padding:0 20px;font-size:14px}
+#menuBtn{display:none;background:none;border:1px solid var(--line);color:var(--gold-hi);width:44px;height:44px;border-radius:12px;cursor:pointer}
+@media (max-width:1080px){
+  #menuBtn{display:inline-flex;align-items:center;justify-content:center}
+  .links{position:fixed;inset:calc(76px + env(safe-area-inset-top,0px)) 0 auto 0;flex-direction:column;align-items:stretch;gap:0;background:rgba(26,7,20,.97);padding:8px max(20px, env(safe-area-inset-right,0px)) 20px max(20px, env(safe-area-inset-left,0px));transform:translateY(-12px);opacity:0;visibility:hidden;transition:.3s;border-bottom:1px solid var(--line)}
+  .links.open{transform:none;opacity:1;visibility:visible}
+  .links a{padding:14px 0;border-bottom:1px solid rgba(92,49,80,.6);font-size:17px}
+  .links .btn{margin-top:14px;border-bottom:0}
+}
+
+/* hero */
+.hero{position:relative;padding-block:24px 96px;overflow:hidden}
+#stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(44px,6.4vw,84px);font-weight:400;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--gold-hi)}
+.hero-copy{display:flex;flex-direction:column;gap:26px;min-width:0}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;color:var(--muted);font-size:14px;letter-spacing:.06em}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust i{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.emblem{position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center}
+.emblem img{position:absolute;inset:9%;width:82%;height:82%;object-fit:cover;border-radius:50%;-webkit-mask-image:radial-gradient(circle,#000 58%,transparent 71%);mask-image:radial-gradient(circle,#000 58%,transparent 71%);animation:breathe 7s ease-in-out infinite}
+.ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(212,176,106,.35)}
+.ring.r2{inset:5%;border-style:dashed;border-color:rgba(212,176,106,.25);animation:spin 60s linear infinite}
+.ring.r3{inset:-3%;border-color:rgba(212,176,106,.12)}
+.orbit{position:absolute;inset:0;animation:spin 24s linear infinite}
+.orbit b{position:absolute;left:50%;top:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--gold-hi);box-shadow:0 0 16px 4px rgba(242,217,156,.7)}
+.orbit.o2{animation-duration:38s;animation-direction:reverse}
+.orbit.o2 b{top:auto;bottom:4%;width:6px;height:6px}
+.glow{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle,rgba(212,176,106,.28),transparent 65%);filter:blur(20px);animation:pulse 5s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{50%{transform:scale(1.025)}}
+@keyframes pulse{50%{opacity:.55;transform:scale(1.08)}}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.emblem{max-width:340px;order:-1}.hero{padding-block:8px 72px}}
+
+/* hero headline reveal (plays once; text is visible without it) */
+.split .w{display:inline-block;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{transform:translateY(.45em);filter:blur(6px)}to{transform:none;filter:none}}
+
+/* section frame */
+section.block{padding-block:96px;position:relative}
+.head{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;margin-bottom:48px}
+.head h2{font-size:clamp(36px,4.6vw,58px)}
+.divider{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--gold)}
+.divider::before,.divider::after{content:"";height:1px;width:min(22vw,180px);background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.divider::after{transform:scaleX(-1)}
+.divider svg{width:66px;height:14px}
+
+/* scroll reveal: moves and sharpens, never hidden */
+.reveal{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .reveal:not(.in){transform:translateY(26px)}
+
+/* areas */
+.areas{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:22px}
+.area{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(61,24,50,.5);color:var(--text);font:400 15px var(--body);letter-spacing:.05em;cursor:pointer;transition:.25s}
+.area svg{width:20px;height:20px;color:var(--gold)}
+.area:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+.area[aria-pressed="true"]{background:linear-gradient(135deg,#E9CB86,#C59A4E);color:var(--ink);border-color:transparent;box-shadow:0 8px 26px -8px rgba(212,176,106,.6)}
+.area[aria-pressed="true"] svg{color:var(--ink)}
+.count{text-align:center;color:var(--muted);font-size:15px;margin-bottom:36px;min-height:1.6em}
+
+/* services */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+.card{position:relative;border-radius:var(--radius);padding:30px 28px 26px;background:linear-gradient(160deg,var(--panel-2),var(--panel) 60%);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transform-style:preserve-3d;transition:transform .25s ease, opacity .45s, filter .45s, border-color .3s, box-shadow .3s;min-width:0}
+.card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--a,0deg),transparent 0 70%,var(--gold-hi) 80%,transparent 90%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::before{opacity:1;animation:sweep 3s linear infinite}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes sweep{to{--a:360deg}}
+.card:hover{box-shadow:0 24px 50px -24px rgba(0,0,0,.8),0 0 40px -18px rgba(212,176,106,.45)}
+.card.dim{opacity:.28;filter:grayscale(.6) blur(1px);transform:scale(.97)}
+.card.match{border-color:var(--gold-dim)}
+.ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(242,217,156,.25),rgba(212,176,106,.06));border:1px solid rgba(212,176,106,.45);color:var(--gold-hi);transform:translateZ(30px)}
+.ic svg{width:28px;height:28px}
+.card h3{font-size:30px;color:var(--text)}
+.card .sub{font-family:var(--display);font-style:italic;color:var(--gold);font-size:18px;margin-top:-8px}
+.card p.d{color:var(--muted);font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.chip{font-size:12.5px;letter-spacing:.08em;padding:4px 12px;border-radius:999px;border:1px solid rgba(212,176,106,.35);color:var(--gold-hi);background:rgba(212,176,106,.06)}
+.card .ask{align-self:flex-start;background:none;border:0;padding:6px 0;min-height:44px;color:var(--gold-hi);font:500 14px var(--body);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px}
+.card .ask span{transition:transform .25s}
+.card .ask:hover span{transform:translateX(5px)}
+
+/* pick a card */
+.pick{background:radial-gradient(ellipse at 50% 0%,rgba(212,176,106,.12),transparent 60%),var(--bg-deep);border-block:1px solid rgba(212,176,106,.15)}
+.deck{display:flex;justify-content:center;gap:clamp(12px,3vw,34px);perspective:1200px;flex-wrap:wrap}
+.tcard{width:clamp(96px,22vw,200px);aspect-ratio:2/3.2;position:relative;cursor:pointer;background:none;border:0;padding:0;transition:transform .4s, opacity .5s}
+.tcard:hover{transform:translateY(-10px) rotate(-1.5deg)}
+.tcard:nth-child(2):hover{transform:translateY(-10px)}
+.tcard:nth-child(3):hover{transform:translateY(-10px) rotate(1.5deg)}
+.tcard .in3{position:absolute;inset:0;transition:transform 1s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.tcard.flipped .in3{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border:1px solid var(--gold-dim)}
+.back{background:radial-gradient(circle at 50% 42%,rgba(212,176,106,.25),transparent 55%),repeating-linear-gradient(45deg,rgba(212,176,106,.07) 0 2px,transparent 2px 12px),linear-gradient(160deg,#3F1734,#220A1B);display:grid;place-items:center;box-shadow:0 18px 40px -18px #000}
+.back::after{content:"";position:absolute;inset:8px;border:1px solid rgba(212,176,106,.4);border-radius:9px}
+.back img{width:58%;border-radius:50%;-webkit-mask-image:radial-gradient(circle,#000 55%,transparent 71%);mask-image:radial-gradient(circle,#000 55%,transparent 71%);opacity:.9}
+.front{transform:rotateY(180deg);background:linear-gradient(170deg,#F6EEDD,#E9DCC2);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;text-align:center}
+.front::after{content:"";position:absolute;inset:8px;border:1px solid rgba(160,126,62,.6);border-radius:9px;pointer-events:none}
+.front .t{font-family:var(--display);font-size:clamp(17px,2.1vw,24px);font-weight:600;line-height:1.1}
+.front .m{font-size:clamp(12px,1.25vw,14.5px);line-height:1.45;color:#4A2A40}
+.front svg{width:30px;height:30px;color:#A07E3E}
+.deck.chosen .tcard:not(.flipped){opacity:.25;transform:scale(.94)}
+.pick-foot{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:40px;text-align:center}
+.pick-foot p{color:var(--muted)}
+
+/* steps */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.steps svg.line{position:absolute;left:12.5%;right:12.5%;top:34px;width:75%;height:4px;overflow:visible}
+.steps svg.line path{stroke:var(--gold-dim);stroke-width:2;stroke-dasharray:6 8;fill:none}
+.steps svg.line path.prog{stroke:var(--gold-hi);stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 2.2s ease}
+.steps.in svg.line path.prog{stroke-dashoffset:0}
+.step{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.step .n{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid var(--gold);font-family:var(--display);font-size:30px;color:var(--gold-hi);box-shadow:0 0 0 6px var(--bg),0 0 30px -6px rgba(212,176,106,.6);position:relative;z-index:1}
+.step h3{font-size:25px}
+.step p{color:var(--muted);font-size:15.5px;max-width:24ch}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr;row-gap:40px}.steps svg.line{display:none}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* about */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.moons{position:relative;aspect-ratio:1;max-width:420px;width:100%;justify-self:center;display:grid;place-items:center}
+.moons .ph{display:flex;gap:14px}
+.moons .ph i{width:clamp(44px,7vw,74px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F5DFA6,#C59A4E 70%);box-shadow:0 0 30px -4px rgba(242,217,156,.6);animation:phase 6s ease-in-out infinite}
+.moons .ph i:nth-child(1){-webkit-mask-image:radial-gradient(circle at 75% 50%,transparent 46%,#000 47%);mask-image:radial-gradient(circle at 75% 50%,transparent 46%,#000 47%)}
+.moons .ph i:nth-child(3){-webkit-mask-image:radial-gradient(circle at 25% 50%,transparent 46%,#000 47%);mask-image:radial-gradient(circle at 25% 50%,transparent 46%,#000 47%)}
+.moons .ph i:nth-child(2){animation-delay:.8s}
+.moons .ph i:nth-child(3){animation-delay:1.6s}
+@keyframes phase{50%{transform:translateY(-8px)}}
+.moons .ring{animation:spin 80s linear infinite}
+.moons .quote{position:absolute;bottom:12%;left:8%;right:8%;text-align:center;font-family:var(--display);font-style:italic;font-size:clamp(19px,2.2vw,24px);color:var(--gold-hi)}
+.about-copy{display:flex;flex-direction:column;gap:20px;min-width:0}
+.about-copy h2{font-size:clamp(36px,4.4vw,54px)}
+.about-copy p{color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.fact{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:rgba(61,24,50,.4)}
+.fact b{display:block;font-family:var(--display);font-size:34px;font-weight:500;color:var(--gold-hi);line-height:1;font-variant-numeric:tabular-nums}
+.fact span{font-size:13.5px;color:var(--muted);letter-spacing:.04em}
+@media (max-width:860px){.about{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:420px){.facts{grid-template-columns:1fr}}
+
+/* form */
+.formwrap{max-width:780px;margin:0 auto;border-radius:24px;padding:clamp(22px,4vw,44px);background:linear-gradient(165deg,rgba(61,24,50,.92),rgba(40,13,32,.95));border:1px solid rgba(212,176,106,.3);box-shadow:0 30px 80px -40px #000,inset 0 1px 0 rgba(242,217,156,.12);position:relative}
+.stepper{display:flex;gap:10px;margin-bottom:28px}
+.stepper div{flex:1;display:flex;flex-direction:column;gap:8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stepper div::before{content:"";height:3px;border-radius:3px;background:var(--line);transition:background .4s}
+.stepper div.on{color:var(--gold-hi)}
+.stepper div.on::before{background:linear-gradient(90deg,var(--gold-dim),var(--gold-hi))}
+fieldset{border:0;margin:0;padding:0;display:none;flex-direction:column;gap:20px;animation:fadeStep .5s ease}
+fieldset.active{display:flex}
+@keyframes fadeStep{from{transform:translateX(24px);opacity:.3}to{transform:none;opacity:1}}
+legend{font-family:var(--display);font-size:30px;margin-bottom:4px;padding:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:620px){.row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+label,.lbl{font-size:14px;letter-spacing:.06em;color:var(--muted)}
+label .opt{color:#9D8797;font-size:12.5px}
+input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;background:rgba(26,7,20,.6);border:1px solid var(--line);border-radius:12px;color:var(--text);font:400 16px var(--body);padding:14px 16px;transition:border-color .2s, box-shadow .2s}
+textarea{min-height:120px;resize:vertical}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 22px) 52%,calc(100% - 16px) 52%;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,176,106,.15)}
+.err{color:#F3A3A3;font-size:13px;min-height:0}
+.invalid{border-color:#E07A7A !important}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pills label{cursor:pointer}
+.pills input{position:absolute;opacity:0;pointer-events:none}
+.pills span{display:inline-flex;align-items:center;padding:10px 16px;border-radius:999px;border:1px solid var(--line);color:var(--text);font-size:15px;letter-spacing:.03em;transition:.2s;background:rgba(26,7,20,.4)}
+.pills input:checked + span{background:rgba(212,176,106,.18);border-color:var(--gold);color:var(--gold-hi)}
+.pills input:focus-visible + span{outline:2px solid var(--gold-hi);outline-offset:2px}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.consent input{margin-top:4px;accent-color:var(--gold);width:18px;height:18px;flex:none}
+.nav-btns{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.done{display:none;flex-direction:column;align-items:center;text-align:center;gap:18px;padding-block:10px}
+.done.show{display:flex;animation:fadeStep .6s ease}
+.done svg.tick{width:96px;height:96px}
+.done svg.tick circle{stroke:var(--gold);stroke-width:2;fill:none;stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1s ease forwards}
+.done svg.tick path{stroke:var(--gold-hi);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .6s .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.summary{width:100%;text-align:left;border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:15px;color:var(--muted);display:grid;grid-template-columns:auto 1fr;gap:6px 16px}
+.summary b{color:var(--gold-hi);font-weight:500}
+.note{font-size:13px;color:#A994A3;text-align:center}
+.sample{display:inline-block;margin-bottom:16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:4px 10px;border-radius:6px}
+
+/* footer */
+footer{background:var(--bg-deep);border-top:1px solid rgba(212,176,106,.18);padding-block:56px calc(40px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:15px}
+.fgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+.fgrid h4{font-family:var(--display);font-weight:500;font-size:22px;color:var(--text);margin:0 0 12px}
+.fgrid a{text-decoration:none;color:var(--muted)}
+.fgrid a:hover{color:var(--gold-hi)}
+.fgrid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.disc{margin-top:36px;padding-top:22px;border-top:1px solid rgba(92,49,80,.7);font-size:13px;color:#A994A3;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+@media (max-width:760px){.fgrid{grid-template-columns:1fr}}
+
+/* floating whatsapp + cursor glow */
+.wa{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#E9CB86,#C59A4E);color:var(--ink);box-shadow:0 10px 30px -8px rgba(0,0,0,.7);text-decoration:none;transition:transform .25s}
+.wa::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:ping 2.4s ease-out infinite}
+.wa:hover{transform:scale(1.08)}
+.wa svg{width:28px;height:28px}
+@keyframes ping{from{transform:scale(1);opacity:.8}to{transform:scale(1.7);opacity:0}}
+#glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;background:radial-gradient(circle,rgba(212,176,106,.10),transparent 60%);pointer-events:none;z-index:1;transition:opacity .4s;opacity:0}
+@media (pointer:fine){#glow{opacity:1}}
+main,header,footer{position:relative;z-index:2}
+
+
+/* ===== Added: interactive layer ===== */
+@media (max-width:1360px) and (min-width:1081px){.links{gap:18px}.links a{font-size:14px;letter-spacing:.04em}}
+.links a{white-space:nowrap}
+/* rotating hero word */
+.rot{display:inline-block;transition:opacity .45s, filter .45s, transform .45s}
+.rot.out{opacity:0;filter:blur(8px);transform:translateY(.2em)}
+
+/* sparkle trail + bursts */
+.spark{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;pointer-events:none;z-index:90;color:var(--gold-hi);animation:sparkfade .9s ease-out forwards}
+.spark svg{width:100%;height:100%;filter:drop-shadow(0 0 4px rgba(242,217,156,.9))}
+@keyframes sparkfade{to{opacity:0;transform:translate(var(--dx,0),var(--dy,14px)) scale(.2) rotate(90deg)}}
+
+/* finder banner */
+.finder-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:0 auto 34px;max-width:860px;padding:18px 22px 18px 26px;border-radius:999px;border:1px solid rgba(212,176,106,.45);background:linear-gradient(100deg,rgba(212,176,106,.16),rgba(61,24,50,.6) 60%);box-shadow:0 0 40px -18px rgba(212,176,106,.6)}
+.finder-cta p{font-family:var(--display);font-size:clamp(19px,2.1vw,24px);color:var(--text)}
+.finder-cta p em{color:var(--gold-hi)}
+@media (max-width:620px){.finder-cta{border-radius:22px;justify-content:center;text-align:center}}
+
+/* modal (quiz) */
+.modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:20px;background:rgba(14,3,11,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .35s, visibility .35s}
+.modal.open{opacity:1;visibility:visible}
+.mbox{position:relative;width:min(640px,100%);max-height:calc(100vh - 40px);overflow:auto;border-radius:26px;padding:clamp(24px,4vw,42px);background:radial-gradient(ellipse at 50% 0%,rgba(212,176,106,.18),transparent 60%),linear-gradient(165deg,#3D1832,#220A1B);border:1px solid rgba(212,176,106,.4);box-shadow:0 40px 100px -30px #000;transform:translateY(16px) scale(.98);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.modal.open .mbox{transform:none}
+.mclose{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(26,7,20,.5);color:var(--gold-hi);font-size:22px;line-height:1;cursor:pointer}
+.qprog{display:flex;gap:8px;margin:4px 48px 22px 0}
+.qprog i{flex:1;height:3px;border-radius:3px;background:var(--line);transition:background .4s}
+.qprog i.on{background:linear-gradient(90deg,var(--gold-dim),var(--gold-hi))}
+.qstep{display:none;flex-direction:column;gap:18px;animation:fadeStep .45s ease}
+.qstep.active{display:flex}
+.qstep h3{font-size:clamp(28px,3.6vw,38px)}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.qopts{grid-template-columns:1fr}}
+.qopt{display:flex;align-items:center;gap:12px;text-align:left;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:rgba(26,7,20,.45);color:var(--text);font:400 16px var(--body);cursor:pointer;transition:.25s}
+.qopt b{font-size:22px;line-height:1;width:28px;flex:none;text-align:center}
+.qopt:hover{border-color:var(--gold);background:rgba(212,176,106,.12);transform:translateY(-2px)}
+.qres{text-align:center;align-items:center}
+.qres .ic{margin:0 auto;width:78px;height:78px;transform:none;animation:pulse 3s ease-in-out infinite}
+.qres .ic svg{width:36px;height:36px}
+.qres .why{color:var(--muted);max-width:44ch}
+.qres .alt{font-size:14px;color:#A994A3}
+
+/* today's energy */
+.today{background:radial-gradient(ellipse at 50% 100%,rgba(212,176,106,.10),transparent 60%)}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+@media (max-width:980px){.tiles{grid-template-columns:1fr;max-width:560px;margin:0 auto}}
+.tile{position:relative;border-radius:var(--radius);padding:30px 26px;background:linear-gradient(160deg,var(--panel-2),var(--panel) 60%);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;min-width:0;overflow:hidden}
+.tile h3{font-size:28px}
+.tile .tag{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.tile p{color:var(--muted);font-size:15.5px}
+/* moon */
+.moonbox{position:relative;width:150px;height:150px}
+.moonbox svg{width:100%;height:100%;overflow:visible}
+.moonbox .halo{position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,rgba(242,217,156,.28),transparent 62%);animation:pulse 5s ease-in-out infinite}
+.mname{font-family:var(--display);font-size:26px;color:var(--gold-hi);line-height:1.1}
+.mmeta{font-size:13px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.intent{font-family:var(--display);font-style:italic;font-size:19px;color:var(--text)!important}
+/* oracle */
+.orb{position:relative;width:150px;height:150px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,rgba(255,244,214,.55),rgba(212,176,106,.25) 30%,rgba(61,24,50,.9) 62%,#1A0714);box-shadow:0 0 0 1px rgba(212,176,106,.5),0 0 50px -6px rgba(212,176,106,.55),inset 0 -12px 30px rgba(0,0,0,.6);transition:transform .2s;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.orb::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--gold-hi);opacity:0;transform:scale(.9)}
+.orb.charging{transform:scale(1.04);animation:orbshake .12s linear infinite}
+.orb.charging::after{opacity:1;animation:ping 1s ease-out infinite}
+@keyframes orbshake{50%{transform:scale(1.04) translate(1px,-1px)}}
+.orb span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:20px;color:var(--gold-hi);padding:20px;line-height:1.1;text-shadow:0 0 12px rgba(0,0,0,.8)}
+.ring-prog{position:absolute;inset:-10px;pointer-events:none;transform:rotate(-90deg)}
+.ring-prog circle{fill:none;stroke:var(--gold-hi);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:534;stroke-dashoffset:534}
+.oq{width:100%;background:rgba(26,7,20,.6);border:1px solid var(--line);border-radius:12px;color:var(--text);font:400 15px var(--body);padding:12px 14px;text-align:center}
+.oq:focus{outline:none;border-color:var(--gold)}
+.oans{min-height:3.2em;font-family:var(--display);font-size:21px;color:var(--gold-hi)!important;transition:opacity .4s}
+.small{font-size:12.5px!important;color:#A994A3!important}
+/* breath */
+.breath{position:relative;width:150px;height:150px;display:grid;place-items:center}
+.breath i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(242,217,156,.55),rgba(212,176,106,.12) 60%,transparent 70%);transform:scale(.55);transition:transform 4s ease-in-out}
+.breath i.ring2{background:none;border:1px solid rgba(212,176,106,.45);transform:scale(1)}
+.breath b{position:relative;font-family:var(--display);font-weight:500;font-size:21px;color:var(--text)}
+.btn-sm{--h:44px;padding:0 20px;font-size:14px}
+
+/* share row */
+.share{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq details{border:1px solid var(--line);border-radius:16px;background:rgba(61,24,50,.4);transition:border-color .3s, background .3s}
+.faq details[open]{border-color:var(--gold-dim);background:rgba(61,24,50,.7)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;justify-content:space-between;gap:16px;align-items:center;font-family:var(--display);font-size:22px;color:var(--text)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--body);font-weight:300;font-size:26px;color:var(--gold);transition:transform .3s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 24px 20px;color:var(--muted)}
+
+
+/* certificates */
+.certs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+@media (max-width:980px){.certs{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+.cert{display:flex;flex-direction:column;gap:14px;text-align:left;background:none;border:0;padding:0;color:inherit;font:inherit;cursor:zoom-in}
+.cert .frame{position:relative;border-radius:14px;padding:10px;background:linear-gradient(140deg,#F2D99C,#A07E3E 45%,#E9CB86 70%,#8C6A2E);box-shadow:0 24px 50px -24px #000,0 0 40px -20px rgba(212,176,106,.6);transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s}
+.cert .frame img{width:100%;aspect-ratio:1170/830;object-fit:cover;border-radius:8px;background:#fff}
+.cert .frame::after{content:"";position:absolute;inset:10px;border-radius:8px;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-100%);transition:transform .9s;pointer-events:none}
+.cert:hover .frame{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 34px 60px -26px #000,0 0 60px -16px rgba(242,217,156,.7)}
+.cert:hover .frame::after{transform:translateX(100%)}
+.cert .seal{position:absolute;right:-12px;top:-12px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#FBEAC0,#C59A4E);color:var(--ink);box-shadow:0 6px 16px -4px #000;font-size:20px}
+.cert .when{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.cert h3{font-size:27px}
+.cert p{color:var(--muted);font-size:15px;margin-top:-6px}
+.cert .view{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi)}
+.lightbox .mbox{width:min(1100px,100%);padding:clamp(14px,2.5vw,26px);text-align:center}
+.lightbox img{width:100%;height:auto;max-height:calc(100vh - 170px);object-fit:contain;border-radius:10px;background:#fff}
+.lightbox .cap{margin-top:12px;color:var(--muted);font-size:15px}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--gold-dim);background:rgba(26,7,20,.75);color:var(--gold-hi);font-size:22px;cursor:pointer}
+.lb-prev{left:6px}.lb-next{right:6px}
+
+
+/* daily affirmation */
+.affirm{position:relative;max-width:900px;margin:0 auto;text-align:center;padding:clamp(28px,4vw,46px) clamp(20px,4vw,56px);border-radius:26px;background:radial-gradient(ellipse at 50% 0%,rgba(242,217,156,.20),transparent 65%),linear-gradient(165deg,#3D1832,#270C1F);border:1px solid rgba(212,176,106,.45);box-shadow:0 30px 70px -40px #000,0 0 60px -30px rgba(212,176,106,.6);overflow:hidden}
+.affirm::before{content:"";position:absolute;inset:10px;border:1px solid rgba(212,176,106,.22);border-radius:18px;pointer-events:none}
+.affirm .tag{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.affirm blockquote{margin:14px auto 10px;max-width:30ch;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(26px,3.6vw,40px);line-height:1.2;color:var(--gold-hi);text-wrap:balance;transition:opacity .6s, filter .6s}
+.affirm blockquote.loading{opacity:.2;filter:blur(6px)}
+.affirm .focus{color:var(--muted);font-size:15.5px;max-width:52ch;margin:0 auto}
+.affirm .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+
+/* welcome toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:80;transform:translate(-50%,140%);width:min(560px,calc(100% - 110px));display:flex;gap:14px;align-items:center;padding:14px 16px 14px 20px;border-radius:18px;background:linear-gradient(120deg,#3D1832,#270C1F);border:1px solid rgba(212,176,106,.55);box-shadow:0 20px 50px -16px #000,0 0 30px -10px rgba(212,176,106,.5);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.toast.show{transform:translate(-50%,0)}
+.toast p{font-size:15px;color:var(--text);line-height:1.45}
+.toast p b{color:var(--gold-hi);font-weight:500}
+.toast button{flex:none;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer;width:36px;height:36px}
+@media (max-width:620px){.toast{left:16px;right:86px;width:auto;transform:translateY(140%)}.toast.show{transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  #glow{display:none}
+}
+</style>
+</head>
+<body>
+
+
+<div id="intro" aria-hidden="true">
+  <video id="introVid" src="intro.mp4" poster="intro-poster.jpg" muted playsinline preload="auto"></video>
+  <button id="skip" type="button">Skip</button>
+</div>
+<div id="progress"></div>
+<div id="glow"></div>
+
+<header class="site" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Mystic Vins home"><img src="emblem.jpg" alt=""><span>mystic_vins</span></a>
+    <button id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#card">Pick a card</a>
+      <a href="#today">Today's energy</a>
+      <a href="#certified">Certified</a>
+      <a href="#faq">FAQ</a>
+      <a href="#about">About</a>
+      <a class="btn btn-gold" href="#enquire">Send an enquiry</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Tarot · Reiki · Ho'oponopono · EFT</span>
+        <h1 class="split">Healing and <em>clarity</em> for every area of your life</h1>
+        <p class="lead">Sessions with Vinita for money, relationships, health and career. Gentle, intuitive guidance to help you find perspective when life feels uncertain.</p>
+        <div class="cta">
+          <a class="btn btn-gold" href="#enquire">Send an enquiry</a>
+          <a class="btn btn-ghost" href="#services" data-open-finder>Find my session ✦</a>
+        </div>
+        <div class="trust"><span><i></i>300+ readings</span><span><i></i><a href="#certified" style="text-decoration:none">Certified in Tarot &amp; Reiki</a></span><span><i></i>Online sessions</span><span><i></i>Udyam registered</span></div>
+      </div>
+      <div class="emblem" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="ring r3"></div><div class="ring"></div><div class="ring r2"></div>
+        <img src="emblem-large.jpg" alt="">
+        <div class="orbit"><b></b></div><div class="orbit o2"><b></b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="affirmation" style="padding-block:24px 40px">
+    <div class="wrap">
+      <div class="affirm reveal" id="affirm">
+        <span class="tag" id="affDate">Today's affirmation</span>
+        <blockquote id="affText" >&nbsp;</blockquote>
+        <p class="focus" id="affFocus"></p>
+        <div class="acts">
+          <button class="btn btn-ghost btn-sm" id="affCopy" type="button">Copy</button>
+          <a class="btn btn-gold btn-sm" id="affShare" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Services</span>
+        <h2>Choose the area you want to heal</h2>
+        <div class="divider" aria-hidden="true"><svg viewBox="0 0 66 14"><path d="M9 2a5 5 0 1 0 0 10a6.5 6.5 0 0 1 0-10z" fill="currentColor"/><circle cx="33" cy="7" r="5.5" fill="currentColor"/><path d="M57 2a5 5 0 1 1 0 10a6.5 6.5 0 0 0 0-10z" fill="currentColor"/></svg></div>
+      </div>
+      <div class="finder-cta reveal"><p>Not sure where to start? <em>Find your session</em> in 30 seconds.</p><button class="btn btn-gold btn-sm" type="button" data-open-finder>Take the session finder</button></div>
+      <div class="areas reveal" role="group" aria-label="Filter by area of life">
+        <button class="area" data-area="all" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l1.8 5.4H19l-4.3 3.2 1.6 5.4L12 13.8 7.7 17l1.6-5.4L5 8.4h5.2z"/></svg>All</button>
+        <button class="area" data-area="money" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5"/><path d="M9 8h6M9 11h6M11 8c2.5 0 3 3 0 3H9l4.5 5"/></svg>Money</button>
+        <button class="area" data-area="relationship" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Relationship</button>
+        <button class="area" data-area="health" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 19c0-8 5-13 14-14c-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg>Health</button>
+        <button class="area" data-area="career" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M9 8V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M4 13h16"/></svg>Career</button>
+        <button class="area" data-area="self" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/></svg>Self &amp; mind</button>
+      </div>
+      <p class="count" id="count" aria-live="polite">6 ways to work with Vinita</p>
+
+      <div class="grid" id="grid">
+        <article class="card reveal" data-areas="money relationship career self" data-name="Intuitive tarot reading">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M12 7l1.2 3.3H17l-3 2.2 1.1 3.4L12 13.8 8.9 15.9 10 12.5 7 10.3h3.8z"/></svg></div>
+          <h3>Tarot reading</h3><p class="sub">Intuitive guidance</p>
+          <p class="d">A reading for the question on your mind, whether it's love, career, money or a decision you feel stuck on.</p>
+          <div class="chips"><span class="chip">Money</span><span class="chip">Relationship</span><span class="chip">Career</span><span class="chip">Decisions</span><span class="chip">✦ Certified</span></div>
+          <button class="ask" data-service="Intuitive tarot reading">Enquire <span>→</span></button>
+        </article>
+        <article class="card reveal" data-areas="money relationship health career" data-name="Ho'oponopono">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 12c0-3 2.2-5 5-5s5 2 5 5-2.2 5-5 5"/><path d="M12 17c-2.8 0-5-2-5-5"/><path d="M4 12h2M18 12h2M12 3v2M12 19v2"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></div>
+          <h3>Ho'oponopono</h3><p class="sub">Forgiveness &amp; release</p>
+          <p class="d">The Hawaiian practice of forgiveness and letting go, guided for the area of life where you feel blocked.</p>
+          <div class="chips"><span class="chip">Money</span><span class="chip">Relationship</span><span class="chip">Health</span><span class="chip">Career</span></div>
+          <button class="ask" data-service="Ho'oponopono">Enquire <span>→</span></button>
+        </article>
+        <article class="card reveal" data-areas="relationship money career health" data-name="Reiki healing">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 14c-1.5-1-2-2.6-2-4.5V6.5a1 1 0 0 1 2 0V10M7 10V5a1 1 0 0 1 2 0v5M9 9.5V4.5a1 1 0 0 1 2 0v5M11 9.5V6a1 1 0 0 1 2 0v6.5c1-1 2.5-1.6 3.2-.6.4.6-.2 1.3-.7 1.8L12 17.5c-1 1-2.5 1.5-4 1.5"/><path d="M17 4l.8 1.6L19.5 6l-1.6.8L17 8.5l-.8-1.7L14.5 6l1.7-.4z"/></svg></div>
+          <h3>Reiki healing</h3><p class="sub">Energy healing</p>
+          <p class="d">Gentle energy healing, in person or at a distance, to help you feel calmer and more balanced in the area you choose.</p>
+          <div class="chips"><span class="chip">Relationship</span><span class="chip">Money</span><span class="chip">Career</span><span class="chip">Health</span><span class="chip">✦ Certified L1 &amp; L2</span></div>
+          <button class="ask" data-service="Reiki healing">Enquire <span>→</span></button>
+        </article>
+        <article class="card reveal" data-areas="health self relationship" data-name="EFT / TFT tapping">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 21v-6.5L6.5 12a1.6 1.6 0 0 1 2.3-2.2L10 11V4.5a1.3 1.3 0 0 1 2.6 0V10l4.2.8a2 2 0 0 1 1.6 2.3L17.5 21"/><path d="M15 3.5l1.5-1M17 6h1.8M4 7.5l-1.4-1"/></svg></div>
+          <h3>EFT / TFT</h3><p class="sub">Tapping therapy</p>
+          <p class="d">Emotional Freedom Technique and Thought Field Therapy. You tap on set points while talking through a feeling, to ease stress and stuck emotions.</p>
+          <div class="chips"><span class="chip">Emotions</span><span class="chip">Stress</span><span class="chip">Self &amp; mind</span></div>
+          <button class="ask" data-service="EFT / TFT tapping">Enquire <span>→</span></button>
+        </article>
+        <article class="card reveal" data-areas="self career" data-name="Handwriting analysis">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15.5 4.5l4 4L9 19H5v-4z"/><path d="M13.5 6.5l4 4"/><path d="M4 21c3 0 4-2 7-2s3 1.5 5 1.5"/></svg></div>
+          <h3>Handwriting analysis</h3><p class="sub">Graphology</p>
+          <p class="d">What your handwriting says about your personality, strengths and habits, and small changes you can practise.</p>
+          <div class="chips"><span class="chip">Self &amp; mind</span><span class="chip">Career</span></div>
+          <button class="ask" data-service="Handwriting analysis">Enquire <span>→</span></button>
+        </article>
+        <article class="card reveal" data-areas="self money career" data-name="Identity shift meditation">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="5.5" r="2.2"/><path d="M12 8.5v5M7 11l5 2.5 5-2.5M5 19c2-1.6 4.4-2.5 7-2.5s5 .9 7 2.5"/><path d="M8 14.5L6 17M16 14.5l2 2.5"/></svg></div>
+          <h3>Identity shift meditation</h3><p class="sub">Become who you want to be</p>
+          <p class="d">Guided meditation to let go of an old self-image and step into the person you want to become.</p>
+          <div class="chips"><span class="chip">Self &amp; mind</span><span class="chip">Money</span><span class="chip">Career</span></div>
+          <button class="ask" data-service="Identity shift meditation">Enquire <span>→</span></button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block pick" id="card">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Pick a card</span>
+        <h2>What does today want you to know?</h2>
+        <p class="lead">Take a breath, think of your question, and choose the card you feel drawn to.</p>
+      </div>
+      <div class="deck" id="deck">
+        <button class="tcard" aria-label="Pick card one"><div class="in3"><div class="face back"><img src="emblem.jpg" alt=""></div><div class="face front"></div></div></button>
+        <button class="tcard" aria-label="Pick card two"><div class="in3"><div class="face back"><img src="emblem.jpg" alt=""></div><div class="face front"></div></div></button>
+        <button class="tcard" aria-label="Pick card three"><div class="in3"><div class="face back"><img src="emblem.jpg" alt=""></div><div class="face front"></div></div></button>
+      </div>
+      <div class="pick-foot">
+        <p id="pickMsg" aria-live="polite">Tap a card to reveal your message.</p>
+        <div class="cta" style="justify-content:center">
+          <button class="btn btn-ghost" id="shuffle" type="button" hidden>Shuffle again</button>
+          <a class="btn btn-ghost" id="shareCard" href="#" target="_blank" rel="noopener" hidden>Share on WhatsApp</a>
+          <a class="btn btn-gold" href="#enquire" id="deeper" hidden>Ask for a full reading</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block today" id="today">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Today's energy</span>
+        <h2>Pause for a moment with the sky</h2>
+        <p class="lead">Tonight's moon, a question for the oracle, and one minute to breathe.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile reveal">
+          <span class="tag">Tonight's moon</span>
+          <div class="moonbox"><div class="halo"></div><svg viewBox="-60 -60 120 120" aria-hidden="true"><defs><radialGradient id="mlit" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#FBEAC0"/><stop offset=".7" stop-color="#D4B06A"/><stop offset="1" stop-color="#A07E3E"/></radialGradient></defs><circle r="50" fill="#1A0714" stroke="rgba(212,176,106,.35)"/><path id="mlitp" fill="url(#mlit)"/></svg></div>
+          <div class="mname" id="mname">Moon</div>
+          <div class="mmeta" id="mmeta"></div>
+          <p class="intent" id="mintent"></p>
+        </div>
+        <div class="tile reveal">
+          <span class="tag">Ask the oracle</span>
+          <input class="oq" id="oq" type="text" maxlength="90" placeholder="Think of a yes-or-no question…" aria-label="Your question">
+          <button class="orb" id="orb" type="button" aria-label="Press and hold the orb for your answer"><svg class="ring-prog" viewBox="0 0 190 190" aria-hidden="true"><circle cx="95" cy="95" r="85" id="orbRing"/></svg><span id="orbTxt">Press &amp; hold</span></button>
+          <p class="oans" id="oans" aria-live="polite">Hold the orb while you focus on your question.</p>
+          <p class="small">For reflection and fun. For real guidance, ask Vinita for a reading.</p>
+        </div>
+        <div class="tile reveal">
+          <span class="tag">One-minute calm</span>
+          <div class="breath" aria-hidden="true"><i class="ring2"></i><i id="bcirc"></i><b id="btxt">Ready?</b></div>
+          <p id="bnote">Breathe in for 4, hold for 4, breathe out for 6. Four rounds, about a minute.</p>
+          <button class="btn btn-ghost btn-sm" id="bstart" type="button">Start breathing</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From enquiry to session in four steps</h2>
+      </div>
+      <div class="steps reveal" id="steps">
+        <svg class="line" viewBox="0 0 1000 4" preserveAspectRatio="none" aria-hidden="true"><path d="M0 2H1000"/><path class="prog" d="M0 2H1000"/></svg>
+        <div class="step"><div class="n">1</div><h3>Enquire</h3><p>Fill in the short form below and tell Vinita what's on your mind.</p></div>
+        <div class="step"><div class="n">2</div><h3>Hear back</h3><p>She replies on WhatsApp with the right session, a time and the price.</p></div>
+        <div class="step"><div class="n">3</div><h3>Confirm</h3><p>Pay by UPI to hold your slot. You get a confirmation straight away.</p></div>
+        <div class="step"><div class="n">4</div><h3>Your session</h3><p>Meet online or by phone, and leave with clear next steps.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap about">
+      <div class="moons reveal" aria-hidden="true">
+        <div class="ring"></div><div class="ring r2"></div>
+        <div class="ph"><i></i><i></i><i></i></div>
+        <p class="quote">“Helping you find perspective when life feels uncertain.”</p>
+      </div>
+      <div class="about-copy reveal">
+        <span class="eyebrow">About Vinita</span>
+        <h2>A calm, intuitive space to be heard</h2>
+        <p>Vinita is an intuitive tarot reader and energy healer. Through tarot, Reiki, Ho'oponopono and tapping, she helps people see their situation clearly, release what is holding them back and take the next step with confidence.</p>
+        <p>Every session is personal and private. You choose the area of life, and she brings the practice that suits it best.</p>
+        <div class="facts">
+          <div class="fact"><b data-count="300">300</b><span>readings and counting</span></div>
+          <div class="fact"><b data-count="6">6</b><span>healing practices</span></div>
+          <div class="fact"><b>3</b><span>certifications in tarot &amp; Reiki</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="certified">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Trained &amp; certified</span>
+        <h2>Learning that stands behind every session</h2>
+        <p class="lead">Vinita has completed formal training in tarot and Reiki healing with mysoulschool. Tap a certificate to view it.</p>
+      </div>
+      <div class="certs">
+        <button class="cert reveal" type="button" data-i="0"><div class="frame"><img src="cert-tarot-diploma-sm.jpg" alt="Tarot Diploma Course certificate, awarded to Aryasomayajula Vinita by mysoulschool, 31 July 2026" loading="lazy"><span class="seal">✦</span></div><span class="when">July 2026</span><h3>Tarot Diploma Course</h3><p>mysoulschool</p><span class="view">View certificate →</span></button>
+        <button class="cert reveal" type="button" data-i="1"><div class="frame"><img src="cert-tarot-advanced-sm.jpg" alt="Advanced Tarot Mastery certificate, awarded to Aryasomayajula Vinita by mysoulschool, 11 September 2026" loading="lazy"><span class="seal">✦</span></div><span class="when">September 2026</span><h3>Advanced Tarot Mastery</h3><p>mysoulschool</p><span class="view">View certificate →</span></button>
+        <button class="cert reveal" type="button" data-i="2"><div class="frame"><img src="cert-reiki-sm.jpg" alt="Reiki Level 1 and Level 2 Program certificate, Certified Healer, awarded to Aryasomayajula Vinita by mysoulschool, 29 October 2026" loading="lazy"><span class="seal">✦</span></div><span class="when">October 2026</span><h3>Reiki Level 1 &amp; 2</h3><p>mysoulschool · Certified Healer</p><span class="view">View certificate →</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Questions</span>
+        <h2>Before your first session</h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary>I've never had a reading. Is that okay?</summary><p class="a">Completely. Many people who come to Vinita are first-timers. You don't need to know anything about tarot or energy healing; just bring the question or feeling that's on your mind.</p></details>
+        <details><summary>How do online sessions work?</summary><p class="a">You meet Vinita on a video or phone call at a time that suits you. She'll share the details on WhatsApp once your slot is confirmed.</p></details>
+        <details><summary>How do I pay?</summary><p class="a">Once Vinita confirms the session, time and price on WhatsApp, you pay by UPI to hold your slot.</p></details>
+        <details><summary>Is what I share kept private?</summary><p class="a">Yes. Every session is personal and confidential.</p></details>
+        <details><summary>Can a session replace medical or professional advice?</summary><p class="a">No. Sessions support wellbeing and personal growth. They don't replace medical, legal or financial advice, and no outcome is ever promised.</p></details>
+        <details><summary>Which service should I choose?</summary><p class="a">Try the <a href="#services" data-open-finder style="color:var(--gold-hi)">30-second session finder</a>, or choose "Not sure, please suggest" in the enquiry form and Vinita will guide you.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="enquire">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Enquiry</span>
+        <h2>Tell Vinita how she can help</h2>
+        <p class="lead">It takes about a minute. She'll reply on WhatsApp, usually within a day.</p>
+      </div>
+      <div class="formwrap reveal">
+        <div class="stepper" aria-hidden="true"><div class="on" data-s="0">About you</div><div data-s="1">What you need</div><div data-s="2">Session</div></div>
+        <form id="form" novalidate>
+          <fieldset class="active" data-step="0">
+            <legend>About you</legend>
+            <div class="row">
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required placeholder="e.g. Priya Sharma"><span class="err"></span></div>
+              <div class="field"><label for="f-phone">WhatsApp number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="10-digit mobile number"><span class="err"></span></div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err"></span></div>
+              <div class="field"><label for="f-city">City <span class="opt">(optional)</span></label><input id="f-city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Hyderabad"></div>
+            </div>
+          </fieldset>
+
+          <fieldset data-step="1">
+            <legend>What you need</legend>
+            <div class="field"><label for="f-service">Service</label>
+              <select id="f-service" name="service" required>
+                <option value="">Choose a service</option>
+                <option>Intuitive tarot reading</option>
+                <option>Ho'oponopono</option>
+                <option>Reiki healing</option>
+                <option>EFT / TFT tapping</option>
+                <option>Handwriting analysis</option>
+                <option>Identity shift meditation</option>
+                <option>Not sure, please suggest</option>
+              </select><span class="err"></span></div>
+            <div class="field"><span class="lbl" id="areas-l">Area of life <span class="opt">(choose any)</span></span>
+              <div class="pills" role="group" aria-labelledby="areas-l">
+                <label><input type="checkbox" name="areas" value="Money"><span>Money</span></label>
+                <label><input type="checkbox" name="areas" value="Relationship"><span>Relationship</span></label>
+                <label><input type="checkbox" name="areas" value="Health"><span>Health</span></label>
+                <label><input type="checkbox" name="areas" value="Career"><span>Career</span></label>
+                <label><input type="checkbox" name="areas" value="Self & mind"><span>Self &amp; mind</span></label>
+              </div></div>
+            <div class="field"><label for="f-msg">What would you like help with? <span class="opt">(optional)</span></label><textarea id="f-msg" name="message" placeholder="A few lines is enough. Everything you share stays private."></textarea></div>
+          </fieldset>
+
+          <fieldset data-step="2">
+            <legend>Your session</legend>
+            <div class="field"><span class="lbl" id="mode-l">How would you like to meet?</span>
+              <div class="pills" role="radiogroup" aria-labelledby="mode-l">
+                <label><input type="radio" name="mode" value="Online video call" checked><span>Online video call</span></label>
+                <label><input type="radio" name="mode" value="Phone call"><span>Phone call</span></label>
+                <label><input type="radio" name="mode" value="In person"><span>In person</span></label>
+              </div></div>
+            <div class="field"><span class="lbl" id="time-l">Best time for you</span>
+              <div class="pills" role="radiogroup" aria-labelledby="time-l">
+                <label><input type="radio" name="time" value="Morning" checked><span>Morning</span></label>
+                <label><input type="radio" name="time" value="Afternoon"><span>Afternoon</span></label>
+                <label><input type="radio" name="time" value="Evening"><span>Evening</span></label>
+              </div></div>
+            <div class="field"><label for="f-src">How did you hear about Vinita?</label>
+              <select id="f-src" name="source" required>
+                <option value="">Choose one</option>
+                <option>Instagram</option><option>YouTube</option><option>Facebook</option><option>WhatsApp</option>
+                <option>Event / visiting card</option><option>Friend or family</option><option>Google</option><option>Other</option>
+              </select><span class="err"></span></div>
+            <label class="consent"><input type="checkbox" id="f-ok" required><span>I understand these sessions support wellbeing and personal growth, and don't replace medical, legal or financial advice.</span></label>
+            <span class="err" id="ok-err"></span>
+          </fieldset>
+
+          <div class="nav-btns" id="navBtns">
+            <button type="button" class="btn btn-ghost" id="back" hidden>Back</button>
+            <span></span>
+            <button type="button" class="btn btn-gold" id="next">Continue</button>
+          </div>
+        </form>
+
+        <div class="done" id="done" aria-live="polite">
+          <svg class="tick" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46"/><path d="M30 52l13 13 27-29"/></svg>
+          <h3 style="font-size:36px">Thank you, <span id="d-name"></span></h3>
+          <p class="lead" style="text-align:center">One last step: tap <b style="color:var(--gold-hi);font-weight:500">Send on WhatsApp</b>, then press send in WhatsApp. Vinita will reply with a time and price.</p>
+          <div class="summary" id="summary"></div>
+          <a class="btn btn-gold" id="waSend" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <button class="btn btn-ghost" id="again" type="button">Start a new enquiry</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="#home"><img src="emblem.jpg" alt=""><span>mystic_vins</span></a>
+        <p style="margin-top:14px;max-width:34ch;font-family:var(--display);font-style:italic;font-size:20px;color:var(--gold-hi)">Helping you find perspective when life feels uncertain.</p>
+        <p style="margin-top:10px;font-size:14px">Certified in Tarot &amp; Reiki</p>
+      </div>
+      <div><h4>Explore</h4><ul>
+        <li><a href="#services">All services</a></li><li><a href="#services" data-open-finder>Find my session</a></li><li><a href="#card">Pick a card</a></li>
+        <li><a href="#today">Today's energy</a></li><li><a href="#certified">Certificates</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Connect</h4><ul>
+        <li><a href="https://www.instagram.com/mystic_vins/" target="_blank" rel="noopener">Instagram · @mystic_vins</a></li>
+        <li><a id="waFoot" href="#" target="_blank" rel="noopener">WhatsApp · [number]</a></li>
+        <li><span>mysticvins.bookings@gmail.com</span></li>
+        <li><a href="#enquire">Send an enquiry</a></li></ul></div>
+    </div>
+    <div class="disc"><span>Sessions support wellbeing and personal growth. They don't replace medical, legal or financial advice.</span><span>© <span id="yr">2026</span> Mystic Vins · Udyam registered MSME</span></div>
+  </div>
+</footer>
+
+<a class="wa" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></svg></a>
+
+<div class="modal" id="finder" role="dialog" aria-modal="true" aria-labelledby="fq0">
+  <div class="mbox">
+    <button class="mclose" id="fclose" type="button" aria-label="Close">×</button>
+    <div class="qprog" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="qstep active" data-q="0">
+      <span class="eyebrow">Session finder · 1 of 3</span>
+      <h3 id="fq0">What's on your mind most right now?</h3>
+      <div class="qopts">
+        <button class="qopt" data-v="love"><b>♡</b>Love &amp; relationships</button>
+        <button class="qopt" data-v="money"><b>✦</b>Money &amp; career</button>
+        <button class="qopt" data-v="health"><b>❀</b>Health &amp; energy</button>
+        <button class="qopt" data-v="self"><b>◐</b>Myself &amp; my growth</button>
+        <button class="qopt" data-v="decision"><b>☽</b>A decision I'm stuck on</button>
+      </div>
+    </div>
+    <div class="qstep" data-q="1">
+      <span class="eyebrow">Session finder · 2 of 3</span>
+      <h3>How are you feeling about it?</h3>
+      <div class="qopts">
+        <button class="qopt" data-v="anxious"><b>≈</b>Anxious or stressed</button>
+        <button class="qopt" data-v="stuck"><b>⌇</b>Stuck or blocked</button>
+        <button class="qopt" data-v="curious"><b>?</b>Curious, I want answers</button>
+        <button class="qopt" data-v="change"><b>↗</b>Ready for a change</button>
+      </div>
+    </div>
+    <div class="qstep" data-q="2">
+      <span class="eyebrow">Session finder · 3 of 3</span>
+      <h3>What would help you most?</h3>
+      <div class="qopts">
+        <button class="qopt" data-v="answers"><b>✧</b>Clear answers &amp; guidance</button>
+        <button class="qopt" data-v="release"><b>❍</b>Letting go &amp; healing</button>
+        <button class="qopt" data-v="understand"><b>✎</b>Understanding myself</button>
+        <button class="qopt" data-v="calm"><b>☁</b>Calm &amp; balance</button>
+      </div>
+    </div>
+    <div class="qstep qres" data-q="3" aria-live="polite">
+      <span class="eyebrow">Your suggested session</span>
+      <div class="ic" id="rIc"></div>
+      <h3 id="rName"></h3>
+      <p class="why" id="rWhy"></p>
+      <p class="alt" id="rAlt"></p>
+      <div class="cta" style="justify-content:center">
+        <button class="btn btn-gold" id="rGo" type="button">Enquire about this</button>
+        <button class="btn btn-ghost" id="rAgain" type="button">Start again</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Certificate">
+  <div class="mbox">
+    <button class="mclose" id="lbx" type="button" aria-label="Close">×</button>
+    <img id="lbImg" src="" alt="">
+    <p class="cap" id="lbCap"></p>
+    <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous certificate">‹</button>
+    <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next certificate">›</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"><p id="toastTxt"></p><button type="button" id="toastX" aria-label="Close">×</button></div>
+
+<script>
+// ---- Settings: fill these in before going live ----
+const CONFIG = {
+  whatsapp: "917330721476",          // her WhatsApp number with country code, digits only, e.g. "919876543210"
+  formEndpoint: "",        // later: Google Apps Script URL that saves enquiries to the CRM sheet
+  visitEndpoint: "",       // later: Google Apps Script URL that privately counts visits in the CRM sheet
+  googleForm: {            // filled in once the Google Form exists: its formResponse URL and the entry.NNN id of each question
+    action: "",
+    fields: {name:"", phone:"", email:"", city:"", service:"", areas:"", message:"", mode:"", time:"", source:"", page_src:""}
+  },
+  affirmationEndpoint: ""  // later: Apps Script URL that serves the Claude-written affirmation of the day (see apps-script/affirmations.gs)
+};
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduce) document.documentElement.classList.add('js');
+const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const waLink = (text) => 'https://wa.me/' + (CONFIG.whatsapp || '') + (text ? '?text=' + encodeURIComponent(text) : '');
+$('#yr').textContent = new Date().getFullYear();
+$('#waFloat').href = waLink('Hi Vinita, I found you through your website and would like to know more.');
+$('#waFoot').href = waLink('Hi Vinita!');
+if (CONFIG.whatsapp) $('#waFoot').textContent = 'WhatsApp · +' + CONFIG.whatsapp.replace(/^(\d{2})(\d{5})(\d+)$/, '$1 $2 $3');
+
+// ---- Intro film (once per visit) ----
+(function(){
+  const ov = $('#intro'), v = $('#introVid');
+  let seen = false; try { seen = sessionStorage.getItem('mv-intro') === '1'; } catch(e){}
+  const close = () => { ov.classList.add('gone'); try { sessionStorage.setItem('mv-intro','1'); } catch(e){} setTimeout(()=>{ try{v.pause()}catch(e){} }, 900); };
+  if (seen || reduce) { ov.remove(); return; }
+  $('#skip').onclick = close;
+  v.addEventListener('ended', close);
+  setTimeout(close, 7000);
+  const p = v.play(); if (p && p.catch) p.catch(close);
+})();
+
+// ---- Header, progress bar, menu ----
+const header = $('header.site'), prog = $('#progress');
+addEventListener('scroll', () => {
+  const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+  header.classList.toggle('scrolled', y > 20);
+  prog.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
+}, {passive:true});
+const menuBtn = $('#menuBtn'), links = $('#links');
+menuBtn.onclick = () => { const o = links.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); };
+$$('#links a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
+
+// ---- Hero headline word rise ----
+$$('.split').forEach(el => {
+  let i = 0;
+  const wrap = node => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(w => {
+          if (!w.trim()) { frag.appendChild(document.createTextNode(w)); return; }
+          const s = document.createElement('span'); s.className = 'w'; s.textContent = w; s.style.animationDelay = (0.15 + i++ * 0.07) + 's'; frag.appendChild(s);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) { n.classList.add('w'); n.style.animationDelay = (0.15 + i++ * 0.07) + 's'; }
+    });
+  };
+  wrap(el);
+});
+
+// ---- Gold star field ----
+(function(){
+  const c = $('#stars'), ctx = c.getContext('2d'); let w, h, dpr, stars = [], run = true;
+  const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n = Math.round(Math.min(110, w * h / 9000));
+    stars = Array.from({length:n}, () => ({x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.6+.3, s:Math.random()*.25+.05, t:Math.random()*6.28, tw:Math.random()*.03+.008})); };
+  const draw = () => {
+    ctx.clearRect(0,0,w,h);
+    for (const p of stars) {
+      if (!reduce) { p.y -= p.s; p.t += p.tw; if (p.y < -4) { p.y = h + 4; p.x = Math.random() * w; } }
+      const a = .35 + .65 * Math.abs(Math.sin(p.t));
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fillStyle = 'rgba(242,217,156,' + a.toFixed(3) + ')';
+      ctx.shadowBlur = p.r > 1.3 ? 8 : 0; ctx.shadowColor = 'rgba(242,217,156,.9)'; ctx.fill();
+    }
+    if (run && !reduce) requestAnimationFrame(draw);
+  };
+  size(); draw(); addEventListener('resize', size);
+  new IntersectionObserver(e => { const was = run; run = e[0].isIntersecting; if (run && !was && !reduce) draw(); }).observe(c);
+})();
+
+// ---- Cursor glow ----
+if (!reduce && matchMedia('(pointer:fine)').matches) {
+  const g = $('#glow'); let gx = innerWidth/2, gy = innerHeight/2, tx = gx, ty = gy;
+  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; }, {passive:true});
+  (function loop(){ gx += (tx-gx)*.12; gy += (ty-gy)*.12; g.style.transform = 'translate(' + gx + 'px,' + gy + 'px)'; requestAnimationFrame(loop); })();
+}
+
+// ---- Scroll reveal + count up ----
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, sib = el.parentElement ? [...el.parentElement.children].filter(x => x.classList.contains('reveal')) : [];
+  el.style.transitionDelay = Math.max(0, sib.indexOf(el)) * 0.08 + 's';
+  el.classList.add('in'); io.unobserve(el);
+  $$('[data-count]', el).forEach(b => {
+    const to = +b.dataset.count; if (reduce) return; let t0;
+    const step = ts => { t0 ??= ts; const k = Math.min(1, (ts - t0) / 1400); b.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))) + (to >= 100 ? '+' : ''); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}), {threshold:.15});
+$$('.reveal').forEach(el => io.observe(el));
+setTimeout(() => $$('.reveal').forEach(el => el.classList.add('in')), 4000);
+
+// ---- Card tilt ----
+if (!reduce && matchMedia('(pointer:fine)').matches) $$('.card').forEach(c => {
+  c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+    if (!c.classList.contains('dim')) c.style.transform = 'perspective(900px) rotateX(' + (-y*7) + 'deg) rotateY(' + (x*7) + 'deg) translateY(-4px)'; });
+  c.addEventListener('pointerleave', () => c.style.transform = '');
+});
+
+// ---- Area filter ----
+const names = {all:'', money:'Money', relationship:'Relationship', health:'Health', career:'Career', self:'Self & mind'};
+$$('.area').forEach(b => b.addEventListener('click', () => {
+  $$('.area').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const a = b.dataset.area; let n = 0;
+  $$('#grid .card').forEach(c => { const ok = a === 'all' || c.dataset.areas.split(' ').includes(a); c.classList.toggle('dim', !ok); c.classList.toggle('match', ok && a !== 'all'); c.style.transform = ''; if (ok) n++; });
+  $('#count').textContent = a === 'all' ? '6 ways to work with Vinita' : n + ' services for ' + names[a];
+}));
+
+// ---- Enquire buttons prefill the form ----
+$$('.ask').forEach(b => b.addEventListener('click', () => {
+  $('#f-service').value = b.dataset.service;
+  const pressed = $('.area[aria-pressed="true"]').dataset.area;
+  if (pressed !== 'all') { const box = $$('input[name=areas]').find(i => i.value === names[pressed]); if (box) box.checked = true; }
+  $('#enquire').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  setTimeout(() => $('#f-name').focus({preventScroll:true}), 700);
+}));
+
+// ---- Pick a card ----
+const messages = [
+  ['Release', 'Let go of what you keep replaying. Space is opening for something better.'],
+  ['Abundance', 'Money follows calm decisions. Take one small, steady step today.'],
+  ['Self-love', 'Speak to yourself the way you would speak to someone you love.'],
+  ['New beginnings', 'A door you thought was closed is quietly opening. Stay curious.'],
+  ['Patience', 'The answer is on its way. Rest, and trust the timing.'],
+  ['Courage', "The conversation you're avoiding is the one that frees you."],
+  ['Balance', 'Give yourself the same care you give everyone else.'],
+  ['Clarity', 'Write it down. What you see on paper loses its power over you.'],
+  ['Gratitude', 'Name three good things before you sleep tonight.'],
+  ['Healing', 'Your body has been carrying a lot. Slow down and breathe deeply.'],
+  ['Growth', 'You are becoming someone new. It is okay to outgrow old places.'],
+  ['Trust', 'Follow the quiet feeling, not the loud fear.']
+];
+const deck = $('#deck'), star = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.3H22l-6.3 4.6 2.4 7.4L12 16.7l-6.1 4.6 2.4-7.4L2 9.3h7.8z"/></svg>';
+let picked = false;
+function deal(){
+  const pool = [...messages].sort(() => Math.random() - .5);
+  $$('.tcard').forEach((t, i) => { t.classList.remove('flipped'); t.querySelector('.front').innerHTML = star + '<div class="t">' + pool[i][0] + '</div><div class="m">' + pool[i][1] + '</div>'; t.dataset.title = pool[i][0]; });
+  deck.classList.remove('chosen'); picked = false;
+  $('#pickMsg').textContent = 'Tap a card to reveal your message.'; $('#shuffle').hidden = true; $('#deeper').hidden = true;
+}
+$$('.tcard').forEach(t => t.addEventListener('click', () => {
+  if (picked) return; picked = true; t.classList.add('flipped'); deck.classList.add('chosen');
+  $('#pickMsg').textContent = 'Your card today: ' + t.dataset.title + '.';
+  setTimeout(() => { $('#shuffle').hidden = false; $('#deeper').hidden = false; }, 700);
+}));
+$('#shuffle').onclick = () => { $$('.tcard').forEach(t => t.classList.remove('flipped')); setTimeout(deal, 450); };
+deal();
+
+// ---- Steps line ----
+new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { $('#steps').classList.add('in'); o.disconnect(); } }, {threshold:.4}).observe($('#steps'));
+
+// ---- Enquiry form (3 steps) ----
+const form = $('#form'), sets = $$('fieldset', form), back = $('#back'), next = $('#next');
+let cur = 0;
+const params = new URLSearchParams(location.search), src = (params.get('src') || '').toLowerCase();
+const srcMap = {event:'Event / visiting card', card:'Event / visiting card', ig:'Instagram', instagram:'Instagram', yt:'YouTube', youtube:'YouTube', fb:'Facebook', facebook:'Facebook', wa:'WhatsApp', whatsapp:'WhatsApp'};
+const srcKey = Object.keys(srcMap).find(k => src.startsWith(k)); if (srcKey) $('#f-src').value = srcMap[srcKey];
+
+function show(i){
+  sets.forEach((f, k) => f.classList.toggle('active', k === i));
+  $$('.stepper div').forEach((d, k) => d.classList.toggle('on', k <= i));
+  back.hidden = i === 0; next.textContent = i === sets.length - 1 ? 'Send enquiry' : 'Continue'; cur = i;
+}
+function setErr(el, msg){ el.classList.toggle('invalid', !!msg); const e = el.parentElement.querySelector('.err'); if (e) e.textContent = msg || ''; }
+function check(i){
+  let ok = true, first = null;
+  const fail = (el, m) => { setErr(el, m); ok = false; first ??= el; };
+  if (i === 0) {
+    const n = $('#f-name'), p = $('#f-phone'), em = $('#f-email');
+    n.value.trim().length < 2 ? fail(n, 'Please enter your name.') : setErr(n);
+    const digits = p.value.replace(/\D/g, '');
+    (digits.length < 10 || digits.length > 13) ? fail(p, 'Please enter a 10-digit mobile number.') : setErr(p);
+    (em.value && !/^\S+@\S+\.\S+$/.test(em.value)) ? fail(em, 'This email address looks incomplete.') : setErr(em);
+  }
+  if (i === 1) { const s = $('#f-service'); !s.value ? fail(s, 'Please choose a service, or "Not sure".') : setErr(s); }
+  if (i === 2) {
+    const s = $('#f-src'); !s.value ? fail(s, 'Please choose one.') : setErr(s);
+    const c = $('#f-ok'); if (!c.checked) { $('#ok-err').textContent = 'Please tick this box to continue.'; ok = false; first ??= c; } else $('#ok-err').textContent = '';
+  }
+  if (first) first.focus();
+  return ok;
+}
+back.onclick = () => show(cur - 1);
+next.onclick = () => { if (!check(cur)) return; if (cur < sets.length - 1) show(cur + 1); else submit(); };
+form.addEventListener('submit', e => { e.preventDefault(); next.click(); });
+
+function submit(){
+  const d = new FormData(form);
+  const data = { name: d.get('name').trim(), phone: d.get('phone').trim(), email: d.get('email') || '', city: d.get('city') || '', service: d.get('service'),
+    areas: d.getAll('areas').join(', ') || 'Not specified', message: (d.get('message') || '').trim(), mode: d.get('mode'), time: d.get('time'), source: d.get('source'), page_src: src || 'direct' };
+  if (CONFIG.formEndpoint) fetch(CONFIG.formEndpoint, {method:'POST', mode:'no-cors', body: JSON.stringify(data)}).catch(()=>{});
+  if (CONFIG.googleForm.action) {   // Google Form behind the site form → responses land in the Enquiries sheet
+    const gf = CONFIG.googleForm.fields, body = new URLSearchParams();
+    Object.keys(gf).forEach(k => { if (gf[k] && data[k] != null) body.append(gf[k], data[k]); });
+    fetch(CONFIG.googleForm.action, {method:'POST', mode:'no-cors', body}).catch(()=>{});
+  }
+  const rows = [['Service', data.service], ['Area', data.areas], ['Session', data.mode + ', ' + data.time.toLowerCase()], ['Heard via', data.source]];
+  $('#summary').innerHTML = rows.map(r => '<span>' + r[0] + '</span><b></b>').join('');
+  $$('#summary b').forEach((b, i) => b.textContent = rows[i][1]);
+  $('#d-name').textContent = data.name.split(' ')[0];
+  const text = 'Hi Vinita, I would like to enquire about a session.\n\nName: ' + data.name + '\nService: ' + data.service + '\nArea: ' + data.areas + '\nSession: ' + data.mode + ', ' + data.time + (data.message ? '\nAbout: ' + data.message : '') + '\nFound you via: ' + data.source;
+  $('#waSend').href = waLink(text);
+  form.hidden = true; $('.stepper').hidden = true; $('#done').classList.add('show');
+  $('#done').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
+}
+$('#again').onclick = () => { form.reset(); if (srcKey) $('#f-src').value = srcMap[srcKey]; form.hidden = false; $('.stepper').hidden = false; $('#done').classList.remove('show'); show(0); };
+
+// ===== Added: interactive layer =====
+const fine = matchMedia('(pointer:fine)').matches;
+const starSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>';
+function spark(x, y, dx, dy, size){
+  if (reduce) return;
+  const s = document.createElement('i'); s.className = 'spark'; s.innerHTML = starSvg;
+  s.style.left = x + 'px'; s.style.top = y + 'px';
+  if (size) { s.style.width = s.style.height = size + 'px'; s.style.margin = (-size/2) + 'px 0 0 ' + (-size/2) + 'px'; }
+  s.style.setProperty('--dx', (dx || 0) + 'px'); s.style.setProperty('--dy', (dy == null ? 14 : dy) + 'px');
+  document.body.appendChild(s); setTimeout(() => s.remove(), 950);
+}
+function burst(x, y, n){ for (let i = 0; i < (n || 12); i++) { const a = Math.PI * 2 * i / (n || 12) + Math.random() * .4, d = 40 + Math.random() * 50; spark(x, y, Math.cos(a) * d, Math.sin(a) * d, 8 + Math.random() * 8); } }
+function burstAt(el, n){ const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, n); }
+
+// sparkle trail (mouse only)
+if (fine && !reduce) {
+  let lx = 0, ly = 0, lt = 0;
+  addEventListener('pointermove', e => {
+    const t = performance.now();
+    if (t - lt < 45 || Math.hypot(e.clientX - lx, e.clientY - ly) < 18) return;
+    lt = t; lx = e.clientX; ly = e.clientY;
+    spark(e.clientX + (Math.random() * 10 - 5), e.clientY + (Math.random() * 10 - 5), Math.random() * 16 - 8, 10 + Math.random() * 14, 6 + Math.random() * 6);
+  }, {passive:true});
+}
+document.addEventListener('click', e => { const b = e.target.closest('.btn-gold, .area, .qopt'); if (b) burst(e.clientX || b.getBoundingClientRect().left, e.clientY || b.getBoundingClientRect().top, 10); });
+
+// rotating hero word
+(function(){
+  const em = $('.hero h1 em'); if (!em || reduce) return;
+  em.classList.add('rot');
+  const words = ['clarity', 'calm', 'courage', 'peace', 'balance'];
+  let i = 0;
+  setInterval(() => { em.classList.add('out'); setTimeout(() => { i = (i + 1) % words.length; em.textContent = words[i]; em.classList.remove('out'); }, 450); }, 2600);
+})();
+
+// ---- Session finder ----
+const svc = {
+  tarot: {name:'Intuitive tarot reading', title:'Tarot reading', why:'A reading gives you a clear view of your situation and the choices in front of you.'},
+  hoo:   {name:"Ho'oponopono", title:"Ho'oponopono", why:'Forgiveness and release, to clear old patterns and make room for something new.'},
+  reiki: {name:'Reiki healing', title:'Reiki healing', why:'Gentle energy healing to help you feel calmer and more balanced.'},
+  eft:   {name:'EFT / TFT tapping', title:'EFT / TFT tapping', why:'Tapping on set points while you talk it through, to ease stress and stuck emotions.'},
+  hand:  {name:'Handwriting analysis', title:'Handwriting analysis', why:'Your handwriting shows strengths and habits you may not see in yourself.'},
+  ids:   {name:'Identity shift meditation', title:'Identity shift meditation', why:'Guided meditation to step out of an old self-image and into who you want to become.'}
+};
+const score = {
+  love:{tarot:2,hoo:2,reiki:1}, money:{tarot:1,hoo:2,ids:2,hand:1}, health:{reiki:3,eft:2,hoo:1}, self:{ids:2,hand:2,eft:1}, decision:{tarot:3,hand:1},
+  anxious:{eft:3,reiki:2}, stuck:{hoo:3,ids:1}, curious:{tarot:2,hand:2}, change:{ids:3,hoo:1},
+  answers:{tarot:3}, release:{hoo:2,reiki:2,eft:1}, understand:{hand:3,tarot:1}, calm:{reiki:3,eft:2}
+};
+const areaOf = {love:'Relationship', money:'Money', health:'Health', self:'Self & mind'};
+const finder = $('#finder'), qsteps = $$('.qstep', finder);
+let answers = [], lastFocus = null, best = null;
+function qshow(i){ qsteps.forEach((s, k) => s.classList.toggle('active', k === i)); $$('.qprog i', finder).forEach((p, k) => p.classList.toggle('on', k <= i)); const b = qsteps[i].querySelector('button'); if (b) setTimeout(() => b.focus({preventScroll:true}), 50); }
+function openFinder(){ lastFocus = document.activeElement; answers = []; qshow(0); finder.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeFinder(){ finder.classList.remove('open'); document.body.style.overflow = ''; if (lastFocus) lastFocus.focus({preventScroll:true}); }
+$$('[data-open-finder]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); openFinder(); }));
+$('#fclose').onclick = closeFinder;
+finder.addEventListener('click', e => { if (e.target === finder) closeFinder(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && finder.classList.contains('open')) closeFinder(); });
+$$('.qopt', finder).forEach(b => b.addEventListener('click', () => {
+  const q = +b.closest('.qstep').dataset.q; answers[q] = b.dataset.v;
+  if (q < 2) { qshow(q + 1); return; }
+  const tot = {}; answers.forEach(a => Object.entries(score[a] || {}).forEach(([k, v]) => tot[k] = (tot[k] || 0) + v));
+  const rank = Object.keys(svc).sort((a, b) => (tot[b] || 0) - (tot[a] || 0));
+  best = rank[0];
+  const s = svc[best], card = $('#grid .card[data-name="' + s.name.replace(/"/g, '') + '"]');
+  $('#rIc').innerHTML = card ? card.querySelector('.ic').innerHTML : '';
+  $('#rName').textContent = s.title; $('#rWhy').textContent = s.why;
+  $('#rAlt').textContent = 'Also a good fit: ' + svc[rank[1]].title;
+  qshow(3); setTimeout(() => burstAt($('#rIc'), 16), 250);
+}));
+$('#rAgain').onclick = () => { answers = []; qshow(0); };
+$('#rGo').onclick = () => {
+  const s = svc[best]; $('#f-service').value = s.name;
+  const ar = areaOf[answers[0]]; if (ar) { const box = $$('input[name=areas]').find(i => i.value === ar); if (box) box.checked = true; }
+  const msg = $('#f-msg'); if (!msg.value) msg.value = 'From the session finder: ' + $$('.qopt', finder).filter(b => answers.includes(b.dataset.v)).map(b => b.textContent.slice(1).trim()).join(' · ');
+  closeFinder(); $('#enquire').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  setTimeout(() => $('#f-name').focus({preventScroll:true}), 700);
+};
+
+// ---- Share the picked card ----
+const siteUrl = location.origin + location.pathname;
+$$('.tcard').forEach(t => t.addEventListener('click', () => {
+  setTimeout(() => {
+    burstAt(t, 14);
+    const m = t.querySelector('.m'), txt = 'My card today from Mystic Vins: ' + t.dataset.title + '. "' + (m ? m.textContent : '') + '" Pick yours: ' + siteUrl;
+    $('#shareCard').href = 'https://wa.me/?text=' + encodeURIComponent(txt); $('#shareCard').hidden = false;
+  }, 500);
+}));
+$('#shuffle').addEventListener('click', () => { $('#shareCard').hidden = true; });
+
+// ---- Moon phase (calculated on the page) ----
+(function(){
+  const SYN = 29.530588853, ref = Date.UTC(2000, 0, 6, 18, 14);
+  const age = ((((Date.now() - ref) / 864e5) % SYN) + SYN) % SYN, f = age / SYN;
+  const illum = Math.round((1 - Math.cos(2 * Math.PI * f)) / 2 * 100);
+  const names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+  const intents = ['Set one clear intention for the month ahead.','Take the first small step towards what you want.','Push gently through the doubt. Keep going.','Refine and adjust. You are closer than you think.','Celebrate what has grown, and release what hasn\'t.','Share what you have learned. Gratitude opens doors.','Let go of one habit that no longer serves you.','Rest and reflect before the next beginning.'];
+  const idx = Math.floor((f * 8) + .5) % 8;
+  const r = 50, rx = Math.abs(r * Math.cos(2 * Math.PI * f)).toFixed(2); let d;
+  if (illum <= 1) d = '';
+  else if (illum >= 99) d = 'M0,-50A50,50 0 1 1 0,50A50,50 0 1 1 0,-50';
+  else if (f < .5) d = 'M0,-50A50,50 0 0 1 0,50A' + rx + ',50 0 0 ' + (f < .25 ? 0 : 1) + ' 0,-50';
+  else d = 'M0,-50A50,50 0 0 0 0,50A' + rx + ',50 0 0 ' + (f < .75 ? 0 : 1) + ' 0,-50';
+  $('#mlitp').setAttribute('d', d);
+  const toFull = ((SYN / 2 - age) + SYN) % SYN, toNew = SYN - age;
+  const next = toFull < toNew ? ['full moon', toFull] : ['new moon', toNew];
+  const days = Math.round(next[1]);
+  $('#mname').textContent = names[idx];
+  $('#mmeta').textContent = illum + '% lit · ' + (days < 1 ? next[0] + ' today' : next[0] + ' in ' + days + (days === 1 ? ' day' : ' days'));
+  $('#mintent').textContent = intents[idx];
+})();
+
+// ---- Oracle orb (press and hold) ----
+(function(){
+  const orb = $('#orb'), ring = $('#orbRing'), txt = $('#orbTxt'), out = $('#oans'), HOLD = 1600, C = 534;
+  const replies = [
+    ['Yes', 'Trust it, and take one small step.'], ['Yes, gently', 'Move slowly and kindly with yourself.'],
+    ['Not yet', 'The timing is still unfolding. Be patient.'], ['Look within', 'You already know more than you think.'],
+    ['Let it go', 'Release your grip and see what returns.'], ['Ask again tomorrow', 'Sleep on it; clarity comes with rest.'],
+    ['The signs say yes', 'Notice what keeps showing up for you.'], ['Choose peace', 'Pick the option that lets you breathe easier.']
+  ];
+  let t0 = 0, raf = 0, holding = false, doneT = 0;
+  const tick = ts => { const k = Math.min(1, (ts - t0) / HOLD); ring.style.strokeDashoffset = C * (1 - k); if (k < 1 && holding) raf = requestAnimationFrame(tick); };
+  const start = e => { e.preventDefault(); if (holding) return; holding = true; orb.classList.add('charging'); txt.textContent = 'Focus…'; out.style.opacity = .35; t0 = performance.now(); raf = requestAnimationFrame(tick); doneT = setTimeout(reveal, HOLD); };
+  const cancel = () => { if (!holding) return; holding = false; clearTimeout(doneT); cancelAnimationFrame(raf); orb.classList.remove('charging'); ring.style.strokeDashoffset = C; txt.textContent = 'Press & hold'; out.style.opacity = 1; };
+  function reveal(){
+    holding = false; cancelAnimationFrame(raf); orb.classList.remove('charging'); ring.style.strokeDashoffset = C;
+    const r = replies[Math.floor(Math.random() * replies.length)];
+    txt.textContent = r[0]; out.textContent = r[1]; out.style.opacity = 1; burstAt(orb, 18);
+    setTimeout(() => { if (!holding) txt.textContent = 'Hold again'; }, 4500);
+  }
+  orb.addEventListener('pointerdown', start); ['pointerup','pointerleave','pointercancel'].forEach(ev => orb.addEventListener(ev, cancel));
+  orb.addEventListener('contextmenu', e => e.preventDefault());
+  orb.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) start(e); });
+  orb.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') cancel(); });
+})();
+
+// ---- One-minute breathing ----
+(function(){
+  const c = $('#bcirc'), t = $('#btxt'), b = $('#bstart'), note = $('#bnote');
+  const seq = [['Breathe in', 4, .95], ['Hold', 4, .95], ['Breathe out', 6, .55]];
+  let timer = null, round = 0, step = 0, run = false;
+  function stop(msg){ run = false; clearTimeout(timer); c.style.transitionDuration = '1s'; c.style.transform = 'scale(.55)'; t.textContent = msg || 'Ready?'; b.textContent = 'Start breathing'; }
+  function go(){
+    if (!run) return;
+    if (step === seq.length) { step = 0; round++; }
+    if (round === 4) { stop('Well done'); note.textContent = 'Notice how you feel now. Come back whenever you need a pause.'; burstAt(c, 14); return; }
+    const [label, secs, sc] = seq[step++];
+    t.textContent = label; c.style.transitionDuration = secs + 's'; c.style.transform = 'scale(' + sc + ')';
+    timer = setTimeout(go, secs * 1000);
+  }
+  b.onclick = () => { if (run) return stop(); run = true; round = 0; step = 0; b.textContent = 'Stop'; go(); };
+})();
+
+// ---- Welcome toast (event visitors, and a once-per-visit nudge for everyone else) ----
+(function(){
+  const toast = $('#toast'), x = $('#toastX');
+  let seen = false; try { seen = sessionStorage.getItem('mv-toast') === '1'; } catch(e){}
+  if (seen) return;
+  const isEvent = srcKey === 'event' || srcKey === 'card';
+  $('#toastTxt').innerHTML = isEvent
+    ? '<b>Lovely to meet you at the event ✦</b><br>Pick a card for today or find your session in 30 seconds.'
+    : '<b>New here?</b> Find the right session for you in 30 seconds.';
+  const showT = () => { toast.classList.add('show'); try { sessionStorage.setItem('mv-toast','1'); } catch(e){} };
+  const hide = () => toast.classList.remove('show');
+  toast.addEventListener('click', e => { if (e.target === x) return hide(); hide(); openFinder(); });
+  setTimeout(showT, isEvent ? 2600 : 9000);
+  setTimeout(hide, isEvent ? 14000 : 20000);
+})();
+
+// ---- Private visit counter (only runs once CONFIG.visitEndpoint is set) ----
+(function(){
+  if (!CONFIG.visitEndpoint) return;
+  let counted = false; try { counted = sessionStorage.getItem('mv-visit') === '1'; sessionStorage.setItem('mv-visit','1'); } catch(e){}
+  if (counted) return;
+  const body = JSON.stringify({type:'visit', source: srcKey ? srcMap[srcKey] : (document.referrer ? new URL(document.referrer).hostname : 'Direct'), path: location.pathname, ts: new Date().toISOString(), screen: innerWidth + 'x' + innerHeight});
+  fetch(CONFIG.visitEndpoint, {method:'POST', mode:'no-cors', body}).catch(() => {});
+})();
+
+// ---- Certificates lightbox ----
+(function(){
+  const certs = [['cert-tarot-diploma.jpg','Tarot Diploma Course · mysoulschool · 31 July 2026'],['cert-tarot-advanced.jpg','Advanced Tarot Mastery · mysoulschool · 11 September 2026'],['cert-reiki.jpg','Reiki Level 1 & Level 2 Program · mysoulschool · 29 October 2026']];
+  const lb = $('#lb'); let i = 0, back = null, sx = null;
+  const set = k => { i = (k + certs.length) % certs.length; $('#lbImg').src = certs[i][0]; $('#lbImg').alt = certs[i][1]; $('#lbCap').textContent = certs[i][1]; };
+  const open = k => { back = document.activeElement; set(k); lb.classList.add('open'); document.body.style.overflow = 'hidden'; $('#lbx').focus({preventScroll:true}); };
+  const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; if (back) back.focus({preventScroll:true}); };
+  $$('.cert').forEach(c => c.addEventListener('click', () => open(+c.dataset.i)));
+  $('#lbx').onclick = close; $('#lbPrev').onclick = () => set(i - 1); $('#lbNext').onclick = () => set(i + 1);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  addEventListener('keydown', e => { if (!lb.classList.contains('open')) return; if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') set(i - 1); if (e.key === 'ArrowRight') set(i + 1); });
+  const img = $('#lbImg');
+  img.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  img.addEventListener('touchend', e => { if (sx == null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) set(i + (dx < 0 ? 1 : -1)); sx = null; });
+})();
+
+// ---- Today's affirmation: Claude-written via Apps Script when connected, built-in set otherwise ----
+(function(){
+  const fallback = [
+    ['I am allowed to take up space and ask for what I need.', 'Notice one need today and say it out loud, kindly.'],
+    ['Peace begins the moment I stop arguing with what is.', 'Pause before reacting today. Breathe once, then choose.'],
+    ['Money flows to me through calm, steady choices.', 'Make one small, sensible money decision today.'],
+    ['I release what I cannot control and tend to what I can.', 'Write down one worry, then one thing you can do about it.'],
+    ['I am worthy of love exactly as I am today.', 'Speak to yourself the way you would speak to a dear friend.'],
+    ['Every ending makes room for a new beginning.', 'Let go of one small thing you have outgrown.'],
+    ['My intuition is wise, and I listen to it.', 'Before a decision today, ask: what does my quiet voice say?'],
+    ['I choose progress over perfection.', 'Finish one task today without polishing it endlessly.'],
+    ['I am grateful for what is already good in my life.', 'Name three good things before you sleep tonight.'],
+    ['I trust the timing of my life.', 'Let one thing unfold today without forcing it.'],
+    ['My body deserves rest, care and kindness.', 'Drink water, stretch, and take one slow break today.'],
+    ['I forgive myself for not knowing then what I know now.', 'Replace one harsh thought about your past with understanding.'],
+    ['I attract relationships built on respect and care.', 'Show appreciation to one person who supports you.'],
+    ['I have everything I need to take the next step.', 'Choose the smallest next step and do it today.'],
+    ['I am becoming the person I want to be.', 'Act once today as your future self would.'],
+    ['Calm is my superpower.', 'When things feel rushed, slow your breath first.'],
+    ['I welcome abundance in all its forms.', 'Notice the abundance already around you: time, people, nature.'],
+    ['My feelings are valid, and they will pass.', 'Name what you feel today without judging it.'],
+    ['I set boundaries with love.', 'Say one gentle "no" that protects your energy.'],
+    ['I am open to clarity and new perspectives.', 'Ask someone you trust how they see your situation.'],
+    ['Healing is not linear, and I honour my pace.', 'Celebrate one small sign of progress.'],
+    ['I let go of comparison and walk my own path.', 'Mute one source of comparison for a day.'],
+    ['I speak my truth with kindness.', 'Have one honest conversation you have been putting off.'],
+    ['Good things are finding their way to me.', 'Stay open to an unexpected opportunity today.'],
+    ['I am safe to slow down.', 'Do one thing today at half your usual speed.'],
+    ['My work has value, and so do I.', 'Acknowledge one thing you did well this week.'],
+    ['I release old stories that no longer fit me.', 'Notice one belief you repeat. Is it still true?'],
+    ['I choose thoughts that lift me up.', 'Catch one negative thought and reframe it gently.'],
+    ['I am connected to something larger than my worries.', 'Spend five minutes outside looking at the sky.'],
+    ['Today, I give myself permission to begin again.', 'Start fresh on one thing you paused.']
+  ];
+  const ist = new Date(Date.now() + 330 * 60000), key = ist.toISOString().slice(0, 10);
+  const dayNo = Math.floor(Date.UTC(ist.getUTCFullYear(), ist.getUTCMonth(), ist.getUTCDate()) / 864e5);
+  const dateTxt = ist.toLocaleDateString('en-IN', {weekday:'long', day:'numeric', month:'long', timeZone:'UTC'});
+  function show(text, focus){
+    $('#affDate').textContent = 'Affirmation for ' + dateTxt;
+    $('#affText').textContent = text; $('#affFocus').textContent = focus || '';
+    $('#affText').classList.remove('loading');
+    $('#affShare').href = 'https://wa.me/?text=' + encodeURIComponent('Today\'s affirmation from Mystic Vins ✨\n"' + text + '"\n' + siteUrl);
+  }
+  // Shuffled order: same for every visitor on a given day, no repeats within a 30-day cycle, new order each cycle
+  const cycle = Math.floor(dayNo / fallback.length);
+  let seed = (cycle * 2654435761) >>> 0;
+  const rnd = () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const order = fallback.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+  const fb = fallback[order[dayNo % fallback.length]];
+  let done = false;
+  const useFallback = () => { if (!done) { done = true; show(fb[0], fb[1]); } };
+  if (CONFIG.affirmationEndpoint) {
+    $('#affText').classList.add('loading');
+    const t = setTimeout(useFallback, 3500);
+    fetch(CONFIG.affirmationEndpoint).then(r => r.json()).then(d => {
+      if (done) return; clearTimeout(t);
+      if (d && d.date === key && d.affirmation) { done = true; show(d.affirmation, d.focus); } else useFallback();
+    }).catch(useFallback);
+  } else useFallback();
+  $('#affCopy').onclick = async () => {
+    const txt = '"' + $('#affText').textContent + '" — Mystic Vins';
+    try { await navigator.clipboard.writeText(txt); $('#affCopy').textContent = 'Copied ✓'; } catch(e) { $('#affCopy').textContent = 'Press and hold to copy'; }
+    setTimeout(() => $('#affCopy').textContent = 'Copy', 2200);
+  };
+})();
+</script>
+
+</body>
+</html>
